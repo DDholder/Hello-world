@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="CORE" />
+    <Filter Include="FWLIB" />
+    <Filter Include="FWLIB\inc" />
+    <Filter Include="FWLIB\src" />
+    <Filter Include="HARDWARE" />
+    <Filter Include="HARDWARE\control" />
+    <Filter Include="HARDWARE\DCMI" />
+    <Filter Include="HARDWARE\KEY" />
+    <Filter Include="HARDWARE\LCD" />
+    <Filter Include="HARDWARE\LED" />
+    <Filter Include="HARDWARE\OV2640" />
+    <Filter Include="HARDWARE\TIMER" />
+    <Filter Include="HARDWARE\USART2" />
+    <Filter Include="SYSTEM" />
+    <Filter Include="SYSTEM\delay" />
+    <Filter Include="SYSTEM\sys" />
+    <Filter Include="SYSTEM\usart" />
+    <Filter Include="USER" />
+    <Filter Include="USMART" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CORE\startup_stm32f40_41xxx.s">
+    <Filter>CORE</Filter>
+    </ClCompile>
+    <ClInclude Include="CORE\core_cm4.h">
+    <Filter>CORE</Filter>
+    </ClInclude>
+    <ClInclude Include="CORE\core_cm4_simd.h">
+    <Filter>CORE</Filter>
+    </ClInclude>
+    <ClInclude Include="CORE\core_cmFunc.h">
+    <Filter>CORE</Filter>
+    </ClInclude>
+    <ClInclude Include="CORE\core_cmInstr.h">
+    <Filter>CORE</Filter>
+    </ClInclude>
+    <ClInclude Include="FWLIB\inc\misc.h">
+    <Filter>FWLIB\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="FWLIB\inc\stm32f4xx_adc.h">
+    <Filter>FWLIB\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="FWLIB\inc\stm32f4xx_can.h">
+    <Filter>FWLIB\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="FWLIB\inc\stm32f4xx_crc.h">
+    <Filter>FWLIB\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="FWLIB\inc\stm32f4xx_cryp.h">
+    <Filter>FWLIB\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="FWLIB\inc\stm32f4xx_dac.h">
+    <Filter>FWLIB\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="FWLIB\inc\stm32f4xx_dbgmcu.h">
+    <Filter>FWLIB\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="FWLIB\inc\stm32f4xx_dcmi.h">
+    <Filter>FWLIB\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="FWLIB\inc\stm32f4xx_dma.h">
+    <Filter>FWLIB\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="FWLIB\inc\stm32f4xx_dma2d.h">
+    <Filter>FWLIB\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="FWLIB\inc\stm32f4xx_exti.h">
+    <Filter>FWLIB\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="FWLIB\inc\stm32f4xx_flash.h">
+    <Filter>FWLIB\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="FWLIB\inc\stm32f4xx_flash_ramfunc.h">
+    <Filter>FWLIB\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="FWLIB\inc\stm32f4xx_fmc.h">
+    <Filter>FWLIB\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="FWLIB\inc\stm32f4xx_fsmc.h">
+    <Filter>FWLIB\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="FWLIB\inc\stm32f4xx_gpio.h">
+    <Filter>FWLIB\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="FWLIB\inc\stm32f4xx_hash.h">
+    <Filter>FWLIB\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="FWLIB\inc\stm32f4xx_i2c.h">
+    <Filter>FWLIB\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="FWLIB\inc\stm32f4xx_iwdg.h">
+    <Filter>FWLIB\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="FWLIB\inc\stm32f4xx_ltdc.h">
+    <Filter>FWLIB\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="FWLIB\inc\stm32f4xx_pwr.h">
+    <Filter>FWLIB\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="FWLIB\inc\stm32f4xx_rcc.h">
+    <Filter>FWLIB\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="FWLIB\inc\stm32f4xx_rng.h">
+    <Filter>FWLIB\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="FWLIB\inc\stm32f4xx_rtc.h">
+    <Filter>FWLIB\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="FWLIB\inc\stm32f4xx_sai.h">
+    <Filter>FWLIB\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="FWLIB\inc\stm32f4xx_sdio.h">
+    <Filter>FWLIB\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="FWLIB\inc\stm32f4xx_spi.h">
+    <Filter>FWLIB\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="FWLIB\inc\stm32f4xx_syscfg.h">
+    <Filter>FWLIB\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="FWLIB\inc\stm32f4xx_tim.h">
+    <Filter>FWLIB\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="FWLIB\inc\stm32f4xx_usart.h">
+    <Filter>FWLIB\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="FWLIB\inc\stm32f4xx_wwdg.h">
+    <Filter>FWLIB\inc</Filter>
+    </ClInclude>
+    <ClCompile Include="FWLIB\src\misc.c">
+    <Filter>FWLIB\src</Filter>
+    </ClCompile>
+    <ClCompile Include="FWLIB\src\stm32f4xx_adc.c">
+    <Filter>FWLIB\src</Filter>
+    </ClCompile>
+    <ClCompile Include="FWLIB\src\stm32f4xx_can.c">
+    <Filter>FWLIB\src</Filter>
+    </ClCompile>
+    <ClCompile Include="FWLIB\src\stm32f4xx_crc.c">
+    <Filter>FWLIB\src</Filter>
+    </ClCompile>
+    <ClCompile Include="FWLIB\src\stm32f4xx_cryp.c">
+    <Filter>FWLIB\src</Filter>
+    </ClCompile>
+    <ClCompile Include="FWLIB\src\stm32f4xx_cryp_aes.c">
+    <Filter>FWLIB\src</Filter>
+    </ClCompile>
+    <ClCompile Include="FWLIB\src\stm32f4xx_cryp_des.c">
+    <Filter>FWLIB\src</Filter>
+    </ClCompile>
+    <ClCompile Include="FWLIB\src\stm32f4xx_cryp_tdes.c">
+    <Filter>FWLIB\src</Filter>
+    </ClCompile>
+    <ClCompile Include="FWLIB\src\stm32f4xx_dac.c">
+    <Filter>FWLIB\src</Filter>
+    </ClCompile>
+    <ClCompile Include="FWLIB\src\stm32f4xx_dbgmcu.c">
+    <Filter>FWLIB\src</Filter>
+    </ClCompile>
+    <ClCompile Include="FWLIB\src\stm32f4xx_dcmi.c">
+    <Filter>FWLIB\src</Filter>
+    </ClCompile>
+    <ClCompile Include="FWLIB\src\stm32f4xx_dma.c">
+    <Filter>FWLIB\src</Filter>
+    </ClCompile>
+    <ClCompile Include="FWLIB\src\stm32f4xx_dma2d.c">
+    <Filter>FWLIB\src</Filter>
+    </ClCompile>
+    <ClCompile Include="FWLIB\src\stm32f4xx_exti.c">
+    <Filter>FWLIB\src</Filter>
+    </ClCompile>
+    <ClCompile Include="FWLIB\src\stm32f4xx_flash.c">
+    <Filter>FWLIB\src</Filter>
+    </ClCompile>
+    <ClCompile Include="FWLIB\src\stm32f4xx_flash_ramfunc.c">
+    <Filter>FWLIB\src</Filter>
+    </ClCompile>
+    <ClCompile Include="FWLIB\src\stm32f4xx_fmc.c">
+    <Filter>FWLIB\src</Filter>
+    </ClCompile>
+    <ClCompile Include="FWLIB\src\stm32f4xx_fsmc.c">
+    <Filter>FWLIB\src</Filter>
+    </ClCompile>
+    <ClCompile Include="FWLIB\src\stm32f4xx_gpio.c">
+    <Filter>FWLIB\src</Filter>
+    </ClCompile>
+    <ClCompile Include="FWLIB\src\stm32f4xx_hash.c">
+    <Filter>FWLIB\src</Filter>
+    </ClCompile>
+    <ClCompile Include="FWLIB\src\stm32f4xx_hash_md5.c">
+    <Filter>FWLIB\src</Filter>
+    </ClCompile>
+    <ClCompile Include="FWLIB\src\stm32f4xx_hash_sha1.c">
+    <Filter>FWLIB\src</Filter>
+    </ClCompile>
+    <ClCompile Include="FWLIB\src\stm32f4xx_i2c.c">
+    <Filter>FWLIB\src</Filter>
+    </ClCompile>
+    <ClCompile Include="FWLIB\src\stm32f4xx_iwdg.c">
+    <Filter>FWLIB\src</Filter>
+    </ClCompile>
+    <ClCompile Include="FWLIB\src\stm32f4xx_ltdc.c">
+    <Filter>FWLIB\src</Filter>
+    </ClCompile>
+    <ClCompile Include="FWLIB\src\stm32f4xx_pwr.c">
+    <Filter>FWLIB\src</Filter>
+    </ClCompile>
+    <ClCompile Include="FWLIB\src\stm32f4xx_rcc.c">
+    <Filter>FWLIB\src</Filter>
+    </ClCompile>
+    <ClCompile Include="FWLIB\src\stm32f4xx_rng.c">
+    <Filter>FWLIB\src</Filter>
+    </ClCompile>
+    <ClCompile Include="FWLIB\src\stm32f4xx_rtc.c">
+    <Filter>FWLIB\src</Filter>
+    </ClCompile>
+    <ClCompile Include="FWLIB\src\stm32f4xx_sai.c">
+    <Filter>FWLIB\src</Filter>
+    </ClCompile>
+    <ClCompile Include="FWLIB\src\stm32f4xx_sdio.c">
+    <Filter>FWLIB\src</Filter>
+    </ClCompile>
+    <ClCompile Include="FWLIB\src\stm32f4xx_spi.c">
+    <Filter>FWLIB\src</Filter>
+    </ClCompile>
+    <ClCompile Include="FWLIB\src\stm32f4xx_syscfg.c">
+    <Filter>FWLIB\src</Filter>
+    </ClCompile>
+    <ClCompile Include="FWLIB\src\stm32f4xx_tim.c">
+    <Filter>FWLIB\src</Filter>
+    </ClCompile>
+    <ClCompile Include="FWLIB\src\stm32f4xx_usart.c">
+    <Filter>FWLIB\src</Filter>
+    </ClCompile>
+    <ClCompile Include="FWLIB\src\stm32f4xx_wwdg.c">
+    <Filter>FWLIB\src</Filter>
+    </ClCompile>
+    <ClCompile Include="HARDWARE\control\control.c">
+    <Filter>HARDWARE\control</Filter>
+    </ClCompile>
+    <ClInclude Include="HARDWARE\control\control.h">
+    <Filter>HARDWARE\control</Filter>
+    </ClInclude>
+    <ClCompile Include="HARDWARE\DCMI\dcmi.c">
+    <Filter>HARDWARE\DCMI</Filter>
+    </ClCompile>
+    <ClInclude Include="HARDWARE\DCMI\dcmi.h">
+    <Filter>HARDWARE\DCMI</Filter>
+    </ClInclude>
+    <ClCompile Include="HARDWARE\KEY\key.c">
+    <Filter>HARDWARE\KEY</Filter>
+    </ClCompile>
+    <ClInclude Include="HARDWARE\KEY\key.h">
+    <Filter>HARDWARE\KEY</Filter>
+    </ClInclude>
+    <ClCompile Include="HARDWARE\LCD\lcd.c">
+    <Filter>HARDWARE\LCD</Filter>
+    </ClCompile>
+    <ClInclude Include="HARDWARE\LCD\FONT.H">
+    <Filter>HARDWARE\LCD</Filter>
+    </ClInclude>
+    <ClInclude Include="HARDWARE\LCD\lcd.h">
+    <Filter>HARDWARE\LCD</Filter>
+    </ClInclude>
+    <ClCompile Include="HARDWARE\LED\led.c">
+    <Filter>HARDWARE\LED</Filter>
+    </ClCompile>
+    <ClInclude Include="HARDWARE\LED\led.h">
+    <Filter>HARDWARE\LED</Filter>
+    </ClInclude>
+    <ClCompile Include="HARDWARE\OV2640\ov2640.c">
+    <Filter>HARDWARE\OV2640</Filter>
+    </ClCompile>
+    <ClCompile Include="HARDWARE\OV2640\sccb.c">
+    <Filter>HARDWARE\OV2640</Filter>
+    </ClCompile>
+    <ClInclude Include="HARDWARE\OV2640\ov2640.h">
+    <Filter>HARDWARE\OV2640</Filter>
+    </ClInclude>
+    <ClInclude Include="HARDWARE\OV2640\ov2640cfg.h">
+    <Filter>HARDWARE\OV2640</Filter>
+    </ClInclude>
+    <ClInclude Include="HARDWARE\OV2640\sccb.h">
+    <Filter>HARDWARE\OV2640</Filter>
+    </ClInclude>
+    <ClCompile Include="HARDWARE\TIMER\timer.c">
+    <Filter>HARDWARE\TIMER</Filter>
+    </ClCompile>
+    <ClInclude Include="HARDWARE\TIMER\timer.h">
+    <Filter>HARDWARE\TIMER</Filter>
+    </ClInclude>
+    <ClCompile Include="HARDWARE\USART2\usart2.c">
+    <Filter>HARDWARE\USART2</Filter>
+    </ClCompile>
+    <ClInclude Include="HARDWARE\USART2\usart2.h">
+    <Filter>HARDWARE\USART2</Filter>
+    </ClInclude>
+    <ClCompile Include="SYSTEM\delay\delay.c">
+    <Filter>SYSTEM\delay</Filter>
+    </ClCompile>
+    <ClInclude Include="SYSTEM\delay\delay.h">
+    <Filter>SYSTEM\delay</Filter>
+    </ClInclude>
+    <ClCompile Include="SYSTEM\sys\sys.c">
+    <Filter>SYSTEM\sys</Filter>
+    </ClCompile>
+    <ClInclude Include="SYSTEM\sys\sys.h">
+    <Filter>SYSTEM\sys</Filter>
+    </ClInclude>
+    <ClCompile Include="SYSTEM\usart\usart.c">
+    <Filter>SYSTEM\usart</Filter>
+    </ClCompile>
+    <ClInclude Include="SYSTEM\usart\usart.h">
+    <Filter>SYSTEM\usart</Filter>
+    </ClInclude>
+    <ClCompile Include="USER\main.c">
+    <Filter>USER</Filter>
+    </ClCompile>
+    <ClCompile Include="USER\stm32f4xx_it.c">
+    <Filter>USER</Filter>
+    </ClCompile>
+    <ClCompile Include="USER\system_stm32f4xx.c">
+    <Filter>USER</Filter>
+    </ClCompile>
+    <ClInclude Include="USER\stm32f4xx.h">
+    <Filter>USER</Filter>
+    </ClInclude>
+    <ClInclude Include="USER\stm32f4xx_conf.h">
+    <Filter>USER</Filter>
+    </ClInclude>
+    <ClInclude Include="USER\stm32f4xx_it.h">
+    <Filter>USER</Filter>
+    </ClInclude>
+    <ClInclude Include="USER\system_stm32f4xx.h">
+    <Filter>USER</Filter>
+    </ClInclude>
+    <ClCompile Include="USMART\usmart.c">
+    <Filter>USMART</Filter>
+    </ClCompile>
+    <ClCompile Include="USMART\usmart_config.c">
+    <Filter>USMART</Filter>
+    </ClCompile>
+    <ClCompile Include="USMART\usmart_str.c">
+    <Filter>USMART</Filter>
+    </ClCompile>
+    <ClInclude Include="USMART\usmart.h">
+    <Filter>USMART</Filter>
+    </ClInclude>
+    <ClInclude Include="USMART\usmart_str.h">
+    <Filter>USMART</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{2F91FE68-F5D2-4C86-9323-882D64B61895}</ProjectGuid>
+    <RootNamespace>Project2</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <ProjectName>实验35 摄像头实验</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>USE_STDPERIPH_DRIVER;STM32F10X_HD;__CC_ARM</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>.\CORE;.\FWLIB\inc;.\HARDWARE\control;.\HARDWARE\DCMI;.\HARDWARE\KEY;.\HARDWARE\LCD;.\HARDWARE\LED;.\HARDWARE\OV2640;.\HARDWARE\TIMER;.\HARDWARE\USART2;.\SYSTEM\delay;.\SYSTEM\sys;.\SYSTEM\usart;.\USER;.\USMART;E:\danpianjigongju\Keil5.2\main\ARM\ARMCC\include</IncludePath>
+    <ReferencePath />
+    <LibraryPath />
+    <LibraryWPath />
+    <ExcludePath />
+    <SourcePath />
+  </PropertyGroup>
+  <ItemGroup>
+    <ClCompile Include="CORE\startup_stm32f40_41xxx.s" />
+    <ClInclude Include="CORE\core_cm4.h" />
+    <ClInclude Include="CORE\core_cm4_simd.h" />
+    <ClInclude Include="CORE\core_cmFunc.h" />
+    <ClInclude Include="CORE\core_cmInstr.h" />
+    <ClInclude Include="FWLIB\inc\misc.h" />
+    <ClInclude Include="FWLIB\inc\stm32f4xx_adc.h" />
+    <ClInclude Include="FWLIB\inc\stm32f4xx_can.h" />
+    <ClInclude Include="FWLIB\inc\stm32f4xx_crc.h" />
+    <ClInclude Include="FWLIB\inc\stm32f4xx_cryp.h" />
+    <ClInclude Include="FWLIB\inc\stm32f4xx_dac.h" />
+    <ClInclude Include="FWLIB\inc\stm32f4xx_dbgmcu.h" />
+    <ClInclude Include="FWLIB\inc\stm32f4xx_dcmi.h" />
+    <ClInclude Include="FWLIB\inc\stm32f4xx_dma.h" />
+    <ClInclude Include="FWLIB\inc\stm32f4xx_dma2d.h" />
+    <ClInclude Include="FWLIB\inc\stm32f4xx_exti.h" />
+    <ClInclude Include="FWLIB\inc\stm32f4xx_flash.h" />
+    <ClInclude Include="FWLIB\inc\stm32f4xx_flash_ramfunc.h" />
+    <ClInclude Include="FWLIB\inc\stm32f4xx_fmc.h" />
+    <ClInclude Include="FWLIB\inc\stm32f4xx_fsmc.h" />
+    <ClInclude Include="FWLIB\inc\stm32f4xx_gpio.h" />
+    <ClInclude Include="FWLIB\inc\stm32f4xx_hash.h" />
+    <ClInclude Include="FWLIB\inc\stm32f4xx_i2c.h" />
+    <ClInclude Include="FWLIB\inc\stm32f4xx_iwdg.h" />
+    <ClInclude Include="FWLIB\inc\stm32f4xx_ltdc.h" />
+    <ClInclude Include="FWLIB\inc\stm32f4xx_pwr.h" />
+    <ClInclude Include="FWLIB\inc\stm32f4xx_rcc.h" />
+    <ClInclude Include="FWLIB\inc\stm32f4xx_rng.h" />
+    <ClInclude Include="FWLIB\inc\stm32f4xx_rtc.h" />
+    <ClInclude Include="FWLIB\inc\stm32f4xx_sai.h" />
+    <ClInclude Include="FWLIB\inc\stm32f4xx_sdio.h" />
+    <ClInclude Include="FWLIB\inc\stm32f4xx_spi.h" />
+    <ClInclude Include="FWLIB\inc\stm32f4xx_syscfg.h" />
+    <ClInclude Include="FWLIB\inc\stm32f4xx_tim.h" />
+    <ClInclude Include="FWLIB\inc\stm32f4xx_usart.h" />
+    <ClInclude Include="FWLIB\inc\stm32f4xx_wwdg.h" />
+    <ClCompile Include="FWLIB\src\misc.c" />
+    <ClCompile Include="FWLIB\src\stm32f4xx_adc.c" />
+    <ClCompile Include="FWLIB\src\stm32f4xx_can.c" />
+    <ClCompile Include="FWLIB\src\stm32f4xx_crc.c" />
+    <ClCompile Include="FWLIB\src\stm32f4xx_cryp.c" />
+    <ClCompile Include="FWLIB\src\stm32f4xx_cryp_aes.c" />
+    <ClCompile Include="FWLIB\src\stm32f4xx_cryp_des.c" />
+    <ClCompile Include="FWLIB\src\stm32f4xx_cryp_tdes.c" />
+    <ClCompile Include="FWLIB\src\stm32f4xx_dac.c" />
+    <ClCompile Include="FWLIB\src\stm32f4xx_dbgmcu.c" />
+    <ClCompile Include="FWLIB\src\stm32f4xx_dcmi.c" />
+    <ClCompile Include="FWLIB\src\stm32f4xx_dma.c" />
+    <ClCompile Include="FWLIB\src\stm32f4xx_dma2d.c" />
+    <ClCompile Include="FWLIB\src\stm32f4xx_exti.c" />
+    <ClCompile Include="FWLIB\src\stm32f4xx_flash.c" />
+    <ClCompile Include="FWLIB\src\stm32f4xx_flash_ramfunc.c" />
+    <ClCompile Include="FWLIB\src\stm32f4xx_fmc.c" />
+    <ClCompile Include="FWLIB\src\stm32f4xx_fsmc.c" />
+    <ClCompile Include="FWLIB\src\stm32f4xx_gpio.c" />
+    <ClCompile Include="FWLIB\src\stm32f4xx_hash.c" />
+    <ClCompile Include="FWLIB\src\stm32f4xx_hash_md5.c" />
+    <ClCompile Include="FWLIB\src\stm32f4xx_hash_sha1.c" />
+    <ClCompile Include="FWLIB\src\stm32f4xx_i2c.c" />
+    <ClCompile Include="FWLIB\src\stm32f4xx_iwdg.c" />
+    <ClCompile Include="FWLIB\src\stm32f4xx_ltdc.c" />
+    <ClCompile Include="FWLIB\src\stm32f4xx_pwr.c" />
+    <ClCompile Include="FWLIB\src\stm32f4xx_rcc.c" />
+    <ClCompile Include="FWLIB\src\stm32f4xx_rng.c" />
+    <ClCompile Include="FWLIB\src\stm32f4xx_rtc.c" />
+    <ClCompile Include="FWLIB\src\stm32f4xx_sai.c" />
+    <ClCompile Include="FWLIB\src\stm32f4xx_sdio.c" />
+    <ClCompile Include="FWLIB\src\stm32f4xx_spi.c" />
+    <ClCompile Include="FWLIB\src\stm32f4xx_syscfg.c" />
+    <ClCompile Include="FWLIB\src\stm32f4xx_tim.c" />
+    <ClCompile Include="FWLIB\src\stm32f4xx_usart.c" />
+    <ClCompile Include="FWLIB\src\stm32f4xx_wwdg.c" />
+    <ClCompile Include="HARDWARE\control\control.c" />
+    <ClInclude Include="HARDWARE\control\control.h" />
+    <ClCompile Include="HARDWARE\DCMI\dcmi.c" />
+    <ClInclude Include="HARDWARE\DCMI\dcmi.h" />
+    <ClCompile Include="HARDWARE\KEY\key.c" />
+    <ClInclude Include="HARDWARE\KEY\key.h" />
+    <ClCompile Include="HARDWARE\LCD\lcd.c" />
+    <ClInclude Include="HARDWARE\LCD\FONT.H" />
+    <ClInclude Include="HARDWARE\LCD\lcd.h" />
+    <ClCompile Include="HARDWARE\LED\led.c" />
+    <ClInclude Include="HARDWARE\LED\led.h" />
+    <ClCompile Include="HARDWARE\OV2640\ov2640.c" />
+    <ClCompile Include="HARDWARE\OV2640\sccb.c" />
+    <ClInclude Include="HARDWARE\OV2640\ov2640.h" />
+    <ClInclude Include="HARDWARE\OV2640\ov2640cfg.h" />
+    <ClInclude Include="HARDWARE\OV2640\sccb.h" />
+    <ClCompile Include="HARDWARE\TIMER\timer.c" />
+    <ClInclude Include="HARDWARE\TIMER\timer.h" />
+    <ClCompile Include="HARDWARE\USART2\usart2.c" />
+    <ClInclude Include="HARDWARE\USART2\usart2.h" />
+    <ClCompile Include="SYSTEM\delay\delay.c" />
+    <ClInclude Include="SYSTEM\delay\delay.h" />
+    <ClCompile Include="SYSTEM\sys\sys.c" />
+    <ClInclude Include="SYSTEM\sys\sys.h" />
+    <ClCompile Include="SYSTEM\usart\usart.c" />
+    <ClInclude Include="SYSTEM\usart\usart.h" />
+    <ClCompile Include="USER\main.c" />
+    <ClCompile Include="USER\stm32f4xx_it.c" />
+    <ClCompile Include="USER\system_stm32f4xx.c" />
+    <ClInclude Include="USER\stm32f4xx.h" />
+    <ClInclude Include="USER\stm32f4xx_conf.h" />
+    <ClInclude Include="USER\stm32f4xx_it.h" />
+    <ClInclude Include="USER\system_stm32f4xx.h" />
+    <ClCompile Include="USMART\usmart.c" />
+    <ClCompile Include="USMART\usmart_config.c" />
+    <ClCompile Include="USMART\usmart_str.c" />
+    <ClInclude Include="USMART\usmart.h" />
+    <ClInclude Include="USMART\usmart_str.h" />
+  </ItemGroup>
+</Project>
