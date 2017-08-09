@@ -235,7 +235,7 @@ int main(void)
 	uart_init(115200);		//初始化串口波特率为115200
 	usart2_init(42,115200);		//初始化串口2波特率为115200
 	LED_Init();					//初始化LED 
- 	//LCD_Init();					//LCD初始化  
+ 	LCD_Init();					//LCD初始化  
  	KEY_Init();					//按键初始化 
 	AngleX = offset_X;
 	AngleY = offset_Y;
@@ -258,14 +258,16 @@ int main(void)
 //	LCD_ShowString(30,130,200,16,16,"OV2640 OK");  	  
 
 	if(0)jpeg_test();
-	
+	pwmx=offset_X;
 	while (1)
 	{
+		KEY_Scan(0);
 		LCD_Clear(WHITE);
-		//LCD_ShowNum(50, 50, pos_X, 3, 16);
-		//LCD_ShowNum(50, 80, pos_Y, 3, 16);
-		LCD_DrawLine(pos_X, 0, pos_X, 320);
-		LCD_DrawLine(0, pos_Y, 240, pos_Y);
+		LCD_ShowNum(50, 50, pwmx_set, 3, 16);
+		LCD_ShowNum(50, 80, pwmx, 3, 16);
+//		LCD_DrawLine(pos_X, 0, pos_X, 320);
+//		LCD_DrawLine(0, pos_Y, 240, pos_Y);
+		delay_ms(50);
 	}
 	//else rgb565_test(); 
 }

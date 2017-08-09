@@ -10,7 +10,7 @@ float outputX,setX,setY;
 
 float KpY = 0.6, KiY = 0, KdY = 5;//0.3  0  8
 float outputY;
-int lastx, lasty;
+float lastx=0, lasty=0;
 float pwmx=0, pwmy=0,pwmx_set=0,pwmy_set=0;
 float n = 0;
 float pid_X(float Setnum)
@@ -62,31 +62,31 @@ void program_main()
 	pwmy_set = offset_Y + pid_Y(setY)*runFlag;
 	lastx = AngleX;
 	lasty = AngleY;
-//	AngleX = offset_X + pid_X(setX)*runFlag;
-//	AngleY = offset_Y + pid_Y(setY)*runFlag;
 	n += 0.2;	
 }
 
 void motorRun(int x, int y)
 {
 	static int countx=0, county=0;
-	if (countx < 20)
+	if (countx < 25)
 	{
 		pwmx += (x - lastx) / 25;
+		countx++;
 	}
 	else
 	{
-		lastx = x;
+			lastx=pwmx;
 		countx = 0;
 	}
 
-	if (county < 20)
+	if (county < 25)
 	{
 		pwmy += (y - lasty) / 25;
+		county++;
 	}
 	else
 	{
-		lasty = y;
+			lasty=pwmy;
 		county = 0;
 	}
 	AngleX = pwmx;

@@ -59,7 +59,7 @@ u8 KEY_Scan(u8 mode)
 		if (KEYU==0)
 		{
 			while (!KEYU);
-			offset_Y+=10;
+			pwmx_set+= 100;
 		}
 		return 0;// 无按键按下
 	}
@@ -69,7 +69,7 @@ u8 KEY_Scan(u8 mode)
 		if (KEYL==0)
 		{
 			while (!KEYL);
-			offset_X-=10;
+			pwmx_set-=1;
 		}
 		return 0;// 无按键按下
 	}
@@ -79,7 +79,7 @@ u8 KEY_Scan(u8 mode)
 		if (KEYD == 0)
 		{
 			while (!KEYD);
-			offset_Y-= 10;
+			pwmx_set-= 100;
 		}
 		return 0;// 无按键按下
 	}
@@ -89,7 +89,7 @@ u8 KEY_Scan(u8 mode)
 		if (KEYR == 0)
 		{
 			while (!KEYR);
-			offset_X+= 10;
+			pwmx_set+= 1;
 		}
 		return 0;// 无按键按下
 	}

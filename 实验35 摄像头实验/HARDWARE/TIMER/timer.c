@@ -57,17 +57,18 @@ void TIM3_IRQHandler(void)
 {
 	if (TIM_GetITStatus(TIM3, TIM_IT_Update) == SET) //Òç³öÖÐ¶Ï
 	{
-		if (runFlag)
+		//if (runFlag)
 			motorRun(pwmx_set, pwmy_set);
 		if (clacFlag == 1)
 		{
-			program_main();
+			//program_main();
 			clacFlag = 0;
 		}
 		if (count < 200)
 			count++;
 		else
 		{
+			lastx=pwmx_set;
 			printf("frame:%d\r\n", fps);//????
 			fps = 0;
 			ov_frame = 0;
