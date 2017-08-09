@@ -25,13 +25,21 @@ extern int point_y_set;
 void Draw_PIC(unsigned char x0, unsigned char y0, unsigned char x1, unsigned char y1, unsigned char bmp[])
 {
 	int32 i, j, k;
-	for (i = 0; i <= 119; i++)
+	for (i = 0; i <= 117; i+=2)
 	{
-		for (j = 0; j <= 159; j++)
+		for (j = 0; j <= 157; j+=2)
 		{
-			if (i >= 19 && i <= 99 && j >= 49 && j <= 109) {
-				SOLGUI_DrawPoint(i+22, j-50, img[i][j]);
+			if(img[i][j]==BLACK_P&&img[i+1][j]==BLACK_P&&img[i][j+1]==BLACK_P&&img[i+1][j+1]==BLACK_P)
+			{
+				SOLGUI_DrawPoint(  j/2+44, i / 2 , BLACK_P);
 			}
+			else
+			{
+				SOLGUI_DrawPoint(j / 2+44, i / 2 , WHITE_P);
+			}
+// 			if (i >= 19 && i <= 99 && j >= 49 && j <= 109) {
+// 				SOLGUI_DrawPoint(i+22, j-50, img[i][j]);
+// 			}
 		}
 
 	}
