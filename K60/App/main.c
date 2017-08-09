@@ -164,6 +164,8 @@ void main()
 		{
 			vcan_sendware((uint8_t *)vcan_send_buff, sizeof(vcan_send_buff));
 		}
+		ftm_pwm_duty(FTM3, FTM_CH0, 100);
+		ftm_pwm_duty(FTM3, FTM_CH1, 100);
 		//ª®∆¡¥¶¿Ì	
 // 		if (gpio_get(SW_3_OLEDreflash) == 0)
 // 		{
