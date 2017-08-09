@@ -29,7 +29,7 @@ void Draw_PIC(unsigned char x0, unsigned char y0, unsigned char x1, unsigned cha
 	{
 		for (j = 0; j <= 157; j+=2)
 		{
-			if(img[i][j]==BLACK_P&&img[i+1][j]==BLACK_P&&img[i][j+1]==BLACK_P&&img[i+1][j+1]==BLACK_P)
+			if(img[i][j]==BLACK_P||img[i+1][j]==BLACK_P||img[i][j+1]==BLACK_P||img[i+1][j+1]==BLACK_P)
 			{
 				SOLGUI_DrawPoint(  j/2+44, i / 2 , BLACK_P);
 			}

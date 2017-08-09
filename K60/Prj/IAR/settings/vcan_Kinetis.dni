@@ -15,7 +15,7 @@ TraceBufferSize=0x00010000
 TraceStallIfFIFOFull=0x00000000
 TracePortSize=0x00000004
 [DebugChecksum]
-Checksum=515738005
+Checksum=-2146337131
 [Exceptions]
 StopOnUncaught=_ 0
 StopOnThrow=_ 0
