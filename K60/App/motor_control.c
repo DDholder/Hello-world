@@ -177,14 +177,25 @@ void PID_M2_Init(void)
 int32_t PID_M1_PosLocCalc(float NextPoint)
 {
 	register float  iError, dError;
-
+	static float g_nDirectionErrorTemp[10];
 	iError = M1PID.SetPoint - NextPoint;        // 偏差
 	M1PID.SumError += iError;				    // 积分
-	if (M1PID.SumError > 2300.0)					//积分限幅
-		M1PID.SumError = 2300.0;
-	else if (M1PID.SumError < -2300.0)
-		M1PID.SumError = -2300.0;
-	dError = iError - M1PID.LastError; 			// 当前微分
+	if (M1PID.SumError > 230.0)					//积分限幅
+		M1PID.SumError = 230.0;
+	else if (M1PID.SumError < -230.0)
+		M1PID.SumError = -230.0;
+	g_nDirectionError = iError;
+	g_nDirectionErrorTemp[9] = g_nDirectionErrorTemp[8];
+	g_nDirectionErrorTemp[8] = g_nDirectionErrorTemp[7];
+	g_nDirectionErrorTemp[7] = g_nDirectionErrorTemp[6];
+	g_nDirectionErrorTemp[6] = g_nDirectionErrorTemp[5];
+	g_nDirectionErrorTemp[5] = g_nDirectionErrorTemp[4];
+	g_nDirectionErrorTemp[4] = g_nDirectionErrorTemp[3];
+	g_nDirectionErrorTemp[3] = g_nDirectionErrorTemp[2];
+	g_nDirectionErrorTemp[2] = g_nDirectionErrorTemp[1];
+	g_nDirectionErrorTemp[1] = g_nDirectionErrorTemp[0];
+	g_nDirectionErrorTemp[0] = g_nDirectionError;
+	dError = g_nDirectionErrorTemp[0] - g_nDirectionErrorTemp[9]; 			// 当前微分
 	M1PID.LastError = iError;
 
 	return(int32_t)(M1PID.Proportion * iError           	// 比例项
@@ -200,14 +211,25 @@ int32_t PID_M1_PosLocCalc(float NextPoint)
 int32_t PID_M2_PosLocCalc(float NextPoint)
 {
 	register float  iError, dError;
-
+	static float g_nDirectionErrorTemp[10];
 	iError = M2PID.SetPoint - NextPoint;        // 偏差
 	M2PID.SumError += iError;
-	if (M2PID.SumError > 2300.0)					//积分限幅
-		M2PID.SumError = 2300.0;
-	else if (M2PID.SumError < -2300.0)
-		M2PID.SumError = -2300.0;
-	dError = iError - M2PID.LastError; 			// 当前微分
+	if (M2PID.SumError > 230.0)					//积分限幅
+		M2PID.SumError = 230.0;
+	else if (M2PID.SumError < -230.0)
+		M2PID.SumError = -230.0;
+	g_nDirectionError = iError;
+	g_nDirectionErrorTemp[9] = g_nDirectionErrorTemp[8];
+	g_nDirectionErrorTemp[8] = g_nDirectionErrorTemp[7];
+	g_nDirectionErrorTemp[7] = g_nDirectionErrorTemp[6];
+	g_nDirectionErrorTemp[6] = g_nDirectionErrorTemp[5];
+	g_nDirectionErrorTemp[5] = g_nDirectionErrorTemp[4];
+	g_nDirectionErrorTemp[4] = g_nDirectionErrorTemp[3];
+	g_nDirectionErrorTemp[3] = g_nDirectionErrorTemp[2];
+	g_nDirectionErrorTemp[2] = g_nDirectionErrorTemp[1];
+	g_nDirectionErrorTemp[1] = g_nDirectionErrorTemp[0];
+	g_nDirectionErrorTemp[0] = g_nDirectionError;
+	dError = g_nDirectionErrorTemp[0] - g_nDirectionErrorTemp[9]; 			// 当前微分
 	M2PID.LastError = iError;
 
 	return(int32_t)(M2PID.Proportion * iError           	// 比例项

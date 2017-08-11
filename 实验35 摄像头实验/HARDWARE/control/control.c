@@ -2,6 +2,49 @@
 #include "control.h"
 #include "timer.h"
 #include "math.h"
+position pos_ball;
+position pos_set[5][5];
+position pos_add[2][2];
+position pos_set_ID = { 2,4 }, pos_now_ID = {0,0};
+position SelectTarget(position pos_begin, position pos_next)
+{
+	position posvalue = pos_next;
+	if ((pos_begin.x - pos_next.x)*(pos_begin.x - pos_next.x) <= 4)
+	{
+		if ((pos_begin.y - pos_next.y)*(pos_begin.y - pos_next.y) <= 4)
+		{
+			return pos_next;
+		}
+	}
+if (pos_begin.x - pos_next.x > 2)
+	{
+		posvalue.x = pos_begin.x == 3 ? 1 : 3;
+		posvalue.y = pos_begin.y == 2 ? pos_next.y < 2 ? 1 : 3 : pos_begin.y < 2 ? 1 : 3;
+		return posvalue;
+	}
+	else if (pos_begin.x - pos_next.x < -2)
+	{
+		posvalue.x = pos_begin.x == 1 ? 3 : 1;
+		posvalue.y = pos_begin.y == 2 ? pos_next.y < 2 ? 1 : 3 : pos_begin.y < 2 ? 1 : 3;
+		return posvalue;
+	}
+	if (pos_begin.y - pos_next.y > 2)
+	{
+		posvalue.y = pos_begin.y == 3 ? 1 : 3;
+
+		posvalue.x = pos_begin.x == 2 ? pos_next.x < 2 ? 1 : 3 : pos_begin.x < 2 ? 1 : 3;
+	}
+	else if (pos_begin.y - pos_next.y < -2)
+	{
+		posvalue.y = pos_begin.y == 1 ? 3 : 1;
+
+		posvalue.x = pos_begin.x == 2 ? pos_next.x < 2 ? 1 : 3 : pos_begin.x < 2 ? 1 : 3;
+	}
+
+	return posvalue;
+}
+
+
 int runFlag = 0;
 int pos_X = 0, pos_Y = 0;
 int offset_X = 740, offset_Y = 910;//+-12

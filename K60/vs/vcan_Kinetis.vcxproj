@@ -27,6 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\App\control.c" />
     <ClCompile Include="..\App\direction.c" />
     <ClCompile Include="..\App\flashload.c">
     </ClCompile>

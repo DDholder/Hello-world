@@ -20,6 +20,12 @@ extern int16 point[2];
 extern int g_ball_x;
 extern int g_ball_y;
 extern int point_y_set;
+
+extern int pwm_temp;
+extern int pwm_temp1;
+extern int servo1_pwm;
+extern int servo2_pwm;
+extern char mode;
 #if MENU_FRAME_EN==1
 //绘制摄像头图像  
 void Draw_PIC(unsigned char x0, unsigned char y0, unsigned char x1, unsigned char y1, unsigned char bmp[])
@@ -27,20 +33,84 @@ void Draw_PIC(unsigned char x0, unsigned char y0, unsigned char x1, unsigned cha
 	int32 i, j, k;
 	for (i = 0; i <= 117; i+=2)
 	{
-		for (j = 0; j <= 157; j+=2)
+		for (j = 0; j<= 157; j+=2)
 		{
 			if(img[i][j]==BLACK_P||img[i+1][j]==BLACK_P||img[i][j+1]==BLACK_P||img[i+1][j+1]==BLACK_P)
 			{
-				SOLGUI_DrawPoint(  j/2+44, i / 2 , BLACK_P);
+				SOLGUI_DrawPoint(  j/2+44, 63-i / 2 , BLACK_P);
 			}
 			else
 			{
-				SOLGUI_DrawPoint(j / 2+44, i / 2 , WHITE_P);
+				SOLGUI_DrawPoint(  j/2+44, 63-i / 2 , WHITE_P);
 			}
 // 			if (i >= 19 && i <= 99 && j >= 49 && j <= 109) {
 // 				SOLGUI_DrawPoint(i+22, j-50, img[i][j]);
 // 			}
 		}
+
+
+	}
+	for (i = 0; i <= 59; i+=2)
+	{
+		SOLGUI_DrawPoint(x_x/2 + 44-5, 63 - i, BLACK_P);    //画竖线
+	}
+	for (i = 0; i <= 59; i+=2)
+	{
+		SOLGUI_DrawPoint(x_x / 2 + 44 +37, 63 - i, BLACK_P);    //画竖线v
+	}
+	for (j = 0; j <= 79; j+=2)
+	{
+		SOLGUI_DrawPoint(j + 44, 63-x_y/2+5, BLACK_P);
+	}
+	for (j = 0; j <= 79; j+=2)
+	{
+		SOLGUI_DrawPoint(j + 44, 63 - x_y / 2 -37, BLACK_P);
+	}
+	for (i = 0; i <= 59; i ++)
+	{
+		SOLGUI_DrawPoint(point[0] / 2 + 44 , 63 - i, BLACK_P);    //画竖线
+	}
+	for (j = 0; j <= 79; j ++)
+	{
+		SOLGUI_DrawPoint(j + 44, 63 - point[1] / 2 , BLACK_P);
+	}
+}
+void Draw_PIC_correct(unsigned char x0, unsigned char y0, unsigned char x1, unsigned char y1, unsigned char bmp[])
+{
+	int32 i, j, k;
+
+	for (i = 0; i <= 159; i++)
+	{
+		img[x_y][i] = BLACK_P;
+	}
+	for (j = 0; j <= 119; j++)
+	{
+		img[j][x_x] = BLACK_P;
+	}
+	for (i = 0; i <= 117; i += 2)
+	{
+		for (j = 0; j <= 157; j += 2)
+		{
+			if (img[i][j] == BLACK_P || img[i + 1][j] == BLACK_P || img[i][j + 1] == BLACK_P || img[i + 1][j + 1] == BLACK_P)
+			{
+				SOLGUI_DrawPoint(j / 2 + 44, 63 - i / 2, BLACK_P);
+			}
+			else
+			{
+				SOLGUI_DrawPoint(j / 2 + 44, 63 - i / 2, WHITE_P);
+			}
+			// 			if (i >= 19 && i <= 99 && j >= 49 && j <= 109) {
+			// 				SOLGUI_DrawPoint(i+22, j-50, img[i][j]);
+			// 			}
+		}
+		// 		for (i = 0; i <= 59; i++)
+		// 		{
+		// 			SOLGUI_DrawPoint(40 + 44, i, BLACK_P);
+		// 		}
+		// 		for (j = 0; j <= 79; j++)
+		// 		{
+		// 			SOLGUI_DrawPoint(j + 44, 30, BLACK_P);
+		// 		}
 
 	}
 }
@@ -57,13 +127,16 @@ void SaveParameter(void)
 	my_cnf[4].f = g_fExpectSpeed;
 	my_cnf[5].f = g_dirControl_P;
 	my_cnf[6].f = g_dirControl_D;
-        my_cnf[7].f = g_dirControl_gyro_D;
-//	my_cnf[7].f = String_Angle_D;
-//	my_cnf[8].f = String_Gyro_P;
-//    my_cnf[9].f = String_Gyro_I;
-//	my_cnf[10].f = String_Gyro_D;
-//	my_cnf[11].f = SPEED_CONTROL_P;
-//	my_cnf[12].f = SPEED_CONTROL_I;
+    my_cnf[7].f = g_dirControl_gyro_D;
+
+	my_cnf[8].f = (float)x_x;
+	my_cnf[9].f = (float)x_y;
+	my_cnf[10].f = M1PID.Proportion;
+	my_cnf[11].f = M1PID.Integral;
+	my_cnf[12].f = M1PID.Derivative;
+	my_cnf[13].f = M2PID.Proportion;
+	my_cnf[14].f = M2PID.Integral;
+	my_cnf[15].f = M2PID.Derivative;
 //	my_cnf[13].f = SPEED_CONTROL_D;
 //	my_cnf[14].f = DIRECTION_CONTROL_P;
 //	my_cnf[15].f = DIRECTION_CONTROL_D;
@@ -82,27 +155,33 @@ void run(void)
 {
 }
 //##############################【自定义页面】##############################
-MENU_PAGE UI_List;MENU_PAGE UI_image_show;MENU_PAGE UI_Dataview;MENU_PAGE UI_Debug;                    
+MENU_PAGE UI_List;MENU_PAGE UI_image_show;MENU_PAGE UI_Dataview;MENU_PAGE UI_Debug;    
+MENU_PAGE UI_image_correct;
 __M_PAGE(UI_List,"CAUC-Readme",PAGE_NULL,
 {
   	SOLGUI_Cursor(6,0,16);
 	SOLGUI_Widget_GotoPage(0,&UI_image_show);
     SOLGUI_Widget_GotoPage(1, &UI_Debug);
-    SOLGUI_Widget_GotoPage(2,&UI_Dataview);
+    SOLGUI_Widget_GotoPage(2,&UI_image_correct);
 	SOLGUI_Widget_Button(3, "SavePara", SaveParameter);
+	//SOLGUI_Widget_Spin(4, "PWM1_test", INT16, -1000, 1000, &pwm_temp);
+	//SOLGUI_Widget_Spin(5, "PWM2_test", INT16, -1000, 1000, &pwm_temp1);
 	//SOLGUI_Widget_Button(4, "Run", run);
 	//SOLGUI_Widget_OptionText(5, " %d ", stop_flag_cnt);
-	SOLGUI_Widget_OptionText(6, "Voltage: %f v", bet_value);  //显示电压
-
+	//SOLGUI_Widget_OptionText(6, "Voltage: %f v", bet_value);  //显示电压
+	
 	//SOLGUI_Widget_OptionText(5, "Voltage:  %d", img[80][20]);
 	//SOLGUI_Widget_Spin(6, "Speed_Set", FLT16, -10000, 10000, &g_fExpectSpeed);
 	//SOLGUI_Widget_OptionText(7, "Angle:   %f ", g_AngleOfCar);
 	SOLGUI_Widget_OptionText(4, "x:   %d ", g_ball_x);
-	SOLGUI_Widget_OptionText(5, "x:   %d ", g_ball_y);
+    SOLGUI_Widget_OptionText(5, "y:   %d ", g_ball_y);
+	SOLGUI_Widget_Spin(6, "mode", INT16, 0, 2, &mode);
+//	SOLGUI_Widget_Spin(4, "PWM1_test", INT16, -10000, 10000, &servo1_pwm);
+//	SOLGUI_Widget_Spin(5, "PWM1_test", INT16, -10000, 10000, &servo2_pwm);
 	//SOLGUI_Widget_Spin(8, "CarStop", INT8, 0, 1, &Flag_Stop);			
 	//SOLGUI_Widget_Spin(9, "SpeedEN", INT8, 0, 1, &Flag_Speed);		
 	//SOLGUI_Widget_Spin(10, "DirecEN", INT8, 0, 1, &Flag_Direction);		
-	SOLGUI_Widget_Spin(7, "motor", FLT16, -1000, 1000, &g_BlanceControlOut);
+	//SOLGUI_Widget_Spin(7, "motor", FLT16, -1000, 1000, &g_BlanceControlOut);
 	SOLGUI_Widget_Spin(13, "vcan_send", INT8, 0, 1, &vcan_send_flag);
 
 });
@@ -125,35 +204,57 @@ __M_PAGE(UI_image_show,"Image",&UI_List,
 // 	img[102][120] = 0;
 	Draw_PIC(0,0,127,63,bmp_buff);
 //SOLGUI_Widget_OptionText(1, "ERR %d ", ttt_cnt);
+SOLGUI_Cursor(6, 0, 16);
 SOLGUI_Widget_OptionText(2, "X%d", point[0]);
 SOLGUI_Widget_OptionText(3, "Y%d", point[1]);
-SOLGUI_DrawPoint(point[1], point[2], 0);
+SOLGUI_Widget_OptionText(4, "X%d", servo1_pwm);
+SOLGUI_Widget_OptionText(5, "Y%d", servo2_pwm);
+// SOLGUI_Widget_Spin(4, " ", INT16, 0, 159, &x_x);
+// SOLGUI_Widget_Spin(5, " ", INT16, 0, 119, &x_y);
+//SOLGUI_DrawPoint(point[1], point[2], 0);
 });
 
+__M_PAGE(UI_image_correct, "correct", &UI_List,
+{
+	// 	img[20][40] =  0;
+	// 	img[20][120] = 0;
+	// 	img[100][40] = 0;
+	// 	img[100][120] =0;
+	// 	img[21][40] =  0;
+	// 	img[21][120] = 0;
+	// 	img[101][40] = 0;
+	// 	img[101][120] =0;
+	// 	img[22][40] = 0;
+	// 	img[22][120] = 0;
+	// 	img[102][40] = 0;
+	// 	img[102][120] = 0;
+	//Draw_PIC_correct(0,0,127,63,bmp_buff);
+//SOLGUI_Widget_OptionText(1, "ERR %d ", ttt_cnt);
+SOLGUI_Cursor(6, 0, 16);
+SOLGUI_Widget_Button(4, "Save", SaveParameter);
+SOLGUI_Widget_Spin(5, "x", INT16, 0, 159, &x_x);
+SOLGUI_Widget_Spin(6, "y", INT16, 0, 119, &x_y);
+SOLGUI_Widget_OptionText(7, "mid_x:   %d ", g_ball_x);
+SOLGUI_Widget_OptionText(8, "mid_y:   %d ", g_ball_y);
+//SOLGUI_DrawPoint(point[1], point[2], 0);
+});
 //-----------------------
 
 __M_PAGE(UI_Dataview,"Dataview",&UI_List,
 {
   	SOLGUI_Cursor(6,0,14); 	
-        SOLGUI_Widget_OptionText(1, "L:   %f ",g_fLeftRealSpeed);
-        SOLGUI_Widget_OptionText(2, "R:   %f ",g_fRighRealSpeed);
-         SOLGUI_Widget_OptionText(3, "1:   %f ",direc_err_1);
-         SOLGUI_Widget_OptionText(4, "2:   %f ",direc_err_2);
-         SOLGUI_Widget_OptionText(5, "3:   %f ",direc_err_3);
+
 });
 //-----------------------
 __M_PAGE(UI_Debug,"Debug",&UI_List,
 {
-		SOLGUI_Cursor(6,0,16);
-		//SOLGUI_Widget_Spin(0, "angel_P", FLT16, -800, 800, &g_upstandControl_P);
-		SOLGUI_Widget_Spin(1, "Set",INT16, -2000, 2000, &point_y_set);
-		//SOLGUI_Widget_Spin(2, "speed_P", FLT16, -2000, 2000, &g_speedControl_P);	
-		SOLGUI_Widget_OptionText(2, "Y%d", point[1]);
-		SOLGUI_Widget_Spin(3, "direc_P", FLT16, -2000, 2000, &g_dirControl_P);
-		SOLGUI_Widget_Spin(4, "direc_D", FLT16, -2000, 2000, &g_dirControl_D);
-                SOLGUI_Widget_Spin(5, "direc_GD", FLT16, -2000, 2000, &g_dirControl_gyro_D);
-                SOLGUI_Widget_Spin(6, "AngOffset", FLT16, -2000, 2000, &angle_offset);
-                SOLGUI_Widget_Spin(7, "CirOffset", INT16, -2000, 2000, &circle_offset);
+		SOLGUI_Cursor(6,0,16);		
+		SOLGUI_Widget_Spin(1, "1Set_P", FLT16, -2000, 2000, &M1PID.Proportion);
+		SOLGUI_Widget_Spin(2, "1Set_I", FLT16, -2000, 2000, &M1PID.Integral);
+		SOLGUI_Widget_Spin(3, "1Set_D", FLT16, -2000, 2000, &M1PID.Derivative);
+		SOLGUI_Widget_Spin(4, "2Set_P", FLT16, -2000, 2000, &M2PID.Proportion);
+		SOLGUI_Widget_Spin(5, "2Set_I", FLT16, -2000, 2000, &M2PID.Integral);
+		SOLGUI_Widget_Spin(6, "2Set_D", FLT16, -2000, 2000, &M2PID.Derivative);
 });
 
 //##############################【全局变量定义】##############################

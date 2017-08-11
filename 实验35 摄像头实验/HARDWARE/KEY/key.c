@@ -49,7 +49,8 @@ u8 KEY_Scan(u8 mode)
 		if (KEYPress==0)
 		{
 			while (!KEYPress);
-			runFlag = !runFlag;
+			//runFlag = !runFlag;
+			pos_now_ID=SelectTarget(pos_now_ID,pos_set_ID);
 		}
 		return 0;// 无按键按下
 	}
@@ -59,7 +60,7 @@ u8 KEY_Scan(u8 mode)
 		if (KEYU==0)
 		{
 			while (!KEYU);
-			pwmx_set+= 100;
+			pos_set_ID.y++;
 		}
 		return 0;// 无按键按下
 	}
@@ -69,7 +70,7 @@ u8 KEY_Scan(u8 mode)
 		if (KEYL==0)
 		{
 			while (!KEYL);
-			pwmx_set-=1;
+			pos_set_ID.x--;
 		}
 		return 0;// 无按键按下
 	}
@@ -79,7 +80,7 @@ u8 KEY_Scan(u8 mode)
 		if (KEYD == 0)
 		{
 			while (!KEYD);
-			pwmx_set-= 100;
+			pos_set_ID.y--;
 		}
 		return 0;// 无按键按下
 	}
@@ -89,7 +90,7 @@ u8 KEY_Scan(u8 mode)
 		if (KEYR == 0)
 		{
 			while (!KEYR);
-			pwmx_set+= 1;
+			pos_set_ID.x++;
 		}
 		return 0;// 无按键按下
 	}

@@ -43,11 +43,11 @@ void MotorInit(void)
 {
 
 	/* 初始化左电机PWM通道 */
-	ftm_pwm_init(FTM3, FTM_CH0, 300, 0);
-	ftm_pwm_init(FTM3, FTM_CH1, 300, 0);
+	ftm_pwm_init(FTM3, FTM_CH0, 330, 0);
+	ftm_pwm_init(FTM3, FTM_CH1, 330, 0);
 	/* 初始化右电机PWM通道 */
-	ftm_pwm_init(FTM3, FTM_CH2, 300, 0);
-	ftm_pwm_init(FTM3, FTM_CH3, 300, 0);
+	ftm_pwm_init(FTM3, FTM_CH2, 330, 0);
+	ftm_pwm_init(FTM3, FTM_CH3, 330, 0);
 	//初始化编码器输入口
 	ftm_quad_init(FTM1);		//PTA12 PTA13
 	ftm_quad_init(FTM2);		//PTA10 PTA11

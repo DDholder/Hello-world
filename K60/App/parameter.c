@@ -64,6 +64,14 @@ void parameter_init(void)
 	g_dirControl_P = my_cnf[5].f;
 	g_dirControl_D = my_cnf[6].f;
         g_dirControl_gyro_D = my_cnf[7].f;
+		x_x = (int)my_cnf[8].f;
+		x_y = (int)my_cnf[9].f;
+		M1PID.Proportion = my_cnf[10].f;
+		M1PID.Integral = my_cnf[11].f;
+		M1PID.Derivative = my_cnf[12].f;
+		M2PID.Proportion = my_cnf[13].f;
+		M2PID.Integral = my_cnf[14].f;
+		M2PID.Derivative = my_cnf[15].f;
 //	String_Angle_D = my_cnf[7].f;
 //	String_Gyro_P = my_cnf[8].f;
 //	String_Gyro_I = my_cnf[9].f;

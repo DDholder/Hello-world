@@ -24,6 +24,9 @@ extern int zhangai_time;
 extern int za_lt;
 extern int za_start;
 extern int point_y_set;
+extern int x_x;
+extern int x_y;
+
 #define    ON           0
 #define    OFF  		1
 /*

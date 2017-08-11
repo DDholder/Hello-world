@@ -1,0 +1,15 @@
+"E:\IAR7.7\main\arm\bin\armproc.dll" 
+
+"E:\IAR7.7\main\arm\bin\armjlink2.dll" 
+
+"F:\17¹úÈü\Hello-world\K60\Prj\IAR\FX15_Debug\Exe\vcan_Kinetis.out" 
+
+--plugin "E:\IAR7.7\main\arm\bin\armbat.dll" 
+
+--device_macro "E:\IAR7.7\main\arm\config\debugger\NXP\Kxx.dmac" 
+
+--flash_loader "E:\IAR7.7\main\arm\config\flashloader\Freescale\FlashK60Fxxx128K.board" 
+
+
+
+

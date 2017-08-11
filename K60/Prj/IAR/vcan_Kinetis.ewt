@@ -6941,6 +6941,9 @@
   <group>
     <name>App</name>
     <file>
+      <name>$PROJ_DIR$\..\..\App\control.c</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\..\..\App\direction.c</name>
     </file>
     <file>

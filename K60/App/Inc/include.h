@@ -3,6 +3,7 @@
 
 
 #include  "common.h"
+#include "control.h"
 
 /*
  * Include 用户自定义的头文件
@@ -37,6 +38,7 @@
 #include  "speed.h"
 #include  "direction.h"
 #include  "image_deal_new.h"
+#include  "control.h"
 //------------【字体】
 #include  "Font4x6_ASCII.h"
 #include  "Font6x8_ASCII.h"

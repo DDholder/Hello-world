@@ -198,6 +198,9 @@
     <ClCompile Include="..\App\image_deal_new.c">
       <Filter>源文件\App</Filter>
     </ClCompile>
+    <ClCompile Include="..\App\control.c">
+      <Filter>源文件\App</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\App\Inc\MK60_conf.h">

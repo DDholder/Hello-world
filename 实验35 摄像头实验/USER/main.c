@@ -263,8 +263,10 @@ int main(void)
 	{
 		KEY_Scan(0);
 		LCD_Clear(WHITE);
-		LCD_ShowNum(50, 50, pwmx_set, 3, 16);
-		LCD_ShowNum(50, 80, pwmx, 3, 16);
+		LCD_ShowNum(50, 50, pos_set_ID.x, 3, 16);
+		LCD_ShowNum(100, 50, pos_set_ID.y, 3, 16);
+		LCD_ShowNum(50, 80, pos_now_ID.x, 3, 16);
+		LCD_ShowNum(100, 80, pos_now_ID.y, 3, 16);
 //		LCD_DrawLine(pos_X, 0, pos_X, 320);
 //		LCD_DrawLine(0, pos_Y, 240, pos_Y);
 		delay_ms(50);
