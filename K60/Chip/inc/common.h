@@ -26,6 +26,8 @@ extern int za_start;
 extern int point_y_set;
 extern int x_x;
 extern int x_y;
+extern int servo_offset1;
+extern int servo_offset2;
 
 #define    ON           0
 #define    OFF  		1

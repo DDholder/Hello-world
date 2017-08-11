@@ -2,15 +2,26 @@
 #include "common.h"
 #include "include.h"
 location pos_ball;
+/*version for djh*/
 location pos_set[5][5] = {
-	{ { 13,25 },{ 0,0 },{ 82,22 },{ 0,0 },{ 151,22 } },
-	{ { 0,0 },{ 0,0 },{ 0,0 },{ 0,0 },{ 0,0 } },
-	{ { 14,93 },{ 0,0 },{ 83,91 },{ 0,0 },{ 151,89 } },
-	{ { 0,0 },{ 0,0 },{ 0,0 },{ 0,0 },{ 0,0 } },
-	{ { 17,159 },{ 0,0 },{ 84,158 },{ 0,0 },{ 151,157 } },
+   { { 34,32 },{ 0,0 },{ 99,35 },{ 0,0 },{ 165,38 } },
+   { { 0,0 },{ 64,64 },{ 0,0 },{ 136,64 },{ 0,0 } },
+   { { 31,99 },{ 0,0 },{ 97,102 },{ 0,0 },{ 164,103 } },
+   { { 0,0 },{ 63,134 },{ 0,0 },{ 135,135 },{ 0,0 } },
+   { { 31,163 },{ 0,0 },{ 94,167 },{ 0,0 },{ 160,167 } },
 
 };
-location pos_set_ID = { 4,2 }, pos_now_ID = { 0,0 };
+//location pos_set[5][5] = {
+//	{ { 26,28 },{ 0,0 },{ 94,26 },{ 0,0 },{ 161,28 } },
+//	{ { 0,0 },{58,60 },{ 0,0 },{ 130,60 },{ 0,0 } },
+//	{ { 25,94 },{ 0,0 },{ 93,93 },{ 0,0 },{ 161,4 } },
+//	{ { 0,0 },{ 58,128 },{ 0,0 },{ 128,127 },{ 0,0 } },
+//	{ { 26,159 },{ 0,0 },{ 93,161 },{ 0,0 },{ 160,160 } },
+//
+//};
+location pos_set_ID = { 4,2 }, pos_now_ID = { 0,0 }, pos_out_ID = { 0,0 };
+location pos_set_IDs[4] ={{2,2},{0,4},{2,0},{4,4}};
+int timeCount = 0;
 //输入：目标点位置ID，现在位置ID
 //输出：规划点位置ID
 //以单个辅助点及周围4个目标点为一个小区域
@@ -59,17 +70,217 @@ location SelectTarget(location pos_begin, location pos_next)
 	}
 	return posvalue;
 }
-void Correct_Mid(int nowMidX,int nowMidY)
+void Correct_Mid(int nowMidX, int nowMidY)
 {
 	int i, j;
 	int offsetx = nowMidX - pos_set[2][2].x, offsety = nowMidY - pos_set[2][2].y;
-	for (i=0;i<5;i++)
+	for (i = 0; i < 5; i++)
 	{
-		for (j=0;j<5;j++)
+		for (j = 0; j < 5; j++)
 		{
 			pos_set[i][j].x += offsetx;
 			pos_set[i][j].y += offsety;
 		}
 	}
+}
+//判断是否到点
+//需更新pos_ball
+int CheckLocation(location SetPosID)
+{
+	
+	if (ABS(pos_set[SetPosID.y][SetPosID.x].x - pos_ball.x)
+		+ ABS(pos_set[SetPosID.y][SetPosID.x].y - pos_ball.y) < 12)
+	{
+		timeCount++;
+	}
+	else
+	{
+		timeCount = 0;
+	}
+	if(SetPosID.y%2!=0)
+	{
+		if (timeCount > 100)
+		{
+			timeCount = 0;
+			return 1;
+		}
+
+	}
+	else
+	{
+		if (timeCount > 500)			//3秒时间到
+		{
+			timeCount = 0;
+			return 1;
+		}
+	}
+	return 0;
+}
+//taskMode:
+//			1:基础1
+//			2:基础2
+//			3:基础3
+//			4:基础4
+//			11:发挥1
+void Task_Confirmed_Target(int taskMode)
+{
+	static int step = 0;
+	location pos_set_temp_IDs[4];
+	static int taskMode_last;       //判断状态改变
+	if (taskMode != taskMode_last)
+	{
+		step = 0;
+	}
+	taskMode_last = taskMode;
+	switch (taskMode)
+	{
+	case 1:
+		pos_set_temp_IDs[0].x = 2;
+		pos_set_temp_IDs[1].x = 2;
+		pos_set_temp_IDs[2].x = 2;
+		pos_set_temp_IDs[3].x = 2;
+
+		pos_set_temp_IDs[0].y = 0;
+		pos_set_temp_IDs[1].y = 0;
+		pos_set_temp_IDs[2].y = 0;
+		pos_set_temp_IDs[3].y = 0;
+		break;
+	case 2:
+		pos_set_temp_IDs[0].x = 0;
+		pos_set_temp_IDs[1].x = 0;
+		pos_set_temp_IDs[2].x = 2;
+		pos_set_temp_IDs[3].x = 2;
+
+		pos_set_temp_IDs[0].y = 0;
+		pos_set_temp_IDs[1].y = 0;
+		pos_set_temp_IDs[2].y = 2;
+		pos_set_temp_IDs[3].y = 2;
+		break;
+	case 3:
+		pos_set_temp_IDs[0].x = 0;
+		pos_set_temp_IDs[1].x = 0;
+		pos_set_temp_IDs[2].x = 2;
+		pos_set_temp_IDs[3].x = 2;
+
+		pos_set_temp_IDs[0].y = 0;
+		pos_set_temp_IDs[1].y = 2;
+		pos_set_temp_IDs[2].y = 2;
+		pos_set_temp_IDs[3].y = 2;
+		break;
+	case 4:
+		pos_set_temp_IDs[0].x = 0;
+		pos_set_temp_IDs[1].x = 0;
+		pos_set_temp_IDs[2].x = 4;
+		pos_set_temp_IDs[3].x = 4;
+
+		pos_set_temp_IDs[0].y = 0;
+		pos_set_temp_IDs[1].y = 0;
+		pos_set_temp_IDs[2].y = 4;
+		pos_set_temp_IDs[3].y = 4;
+		break;
+	case 5:
+		pos_set_temp_IDs[0].x = 0;
+		pos_set_temp_IDs[1].x = 2;
+		pos_set_temp_IDs[2].x = 4;
+		pos_set_temp_IDs[3].x = 4;
+
+		pos_set_temp_IDs[0].y = 0;
+		pos_set_temp_IDs[1].y = 0;
+		pos_set_temp_IDs[2].y = 2;
+		pos_set_temp_IDs[3].y = 4;
+		break;
+	default:
+		break;
+	}
+	if (step == 0)
+	{
+		pos_now_ID= pos_set_temp_IDs[0];
+	}
+	pos_set_ID = pos_set_temp_IDs[step];
+	//pos_set_ID.x = pos_set[2][0].x;
+	//pos_set_ID.y = pos_set[2][0].y;
+	pos_out_ID = SelectTarget(pos_now_ID, pos_set_ID);
+	if (CheckLocation(pos_out_ID))
+	{
+
+			if (step < 3)step++;
+			pos_now_ID = pos_out_ID;
+
+	}
+}
+//发挥2
+void Task_Changed_Target()
+{
+	static int step = 0;
+	
+	if (step == 0)
+	{
+		pos_now_ID = pos_set_IDs[0];
+	}
+	pos_set_ID = pos_set_IDs[step];
+	pos_out_ID = SelectTarget(pos_now_ID, pos_set_ID);
+	if (CheckLocation(pos_out_ID))
+	{
+		if (pos_out_ID.y % 2 == 0)
+		{
+			if (step < 3)step++;
+			
+		}
+		pos_now_ID = pos_out_ID;
+	}
+}
+//发挥3
+void Task_Move_Around()
+{
+	static int step = 0;
+	location pos_set_temp_IDs[6] = {
+		{ 0,2 },{ 1,1 },{ 3,1 },{ 3,3 },{ 1,3 },{ 4,4 }
+	};
+	if (step == 0)
+	{
+		pos_set_ID = pos_set_temp_IDs[0];
+		pos_now_ID = pos_set_temp_IDs[0];
+	}
+	else if (step == 16)
+		pos_set_ID = pos_set_temp_IDs[5];
+	else if (step % 4 != 0)
+		pos_set_ID = pos_set_temp_IDs[step % 4];
+	else
+		pos_set_ID = pos_set_temp_IDs[4];
+	pos_out_ID = SelectTarget(pos_now_ID, pos_set_ID);
+	if (CheckLocation(pos_out_ID))
+	{
+		if (step < 16)step++;
+		pos_now_ID = pos_out_ID;
+	}
+}
+
+//其他
+void Task_Advance()
+{
+
+}
+//taskMode:
+//			1:基础1
+//			2:基础2
+//			3:基础3
+//			4:基础4
+//			11:发挥1
+//			12:发挥2
+//			13:发挥3
+//			14:发挥4(其他)
+//设定点x=pos_set[pos_out_ID.x][pos_out_ID.y].x
+//设定点y=pos_set[pos_out_ID.x][pos_out_ID.y].y
+void Task_program(int taskMode)
+{
+	if (taskMode == 6)
+		Task_Changed_Target();
+	else if (taskMode == 7)
+		Task_Move_Around();
+	else if (taskMode == 8)
+		Task_Advance();
+	else
+		Task_Confirmed_Target(taskMode);
+
 }
 

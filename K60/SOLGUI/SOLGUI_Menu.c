@@ -26,6 +26,8 @@ extern int pwm_temp1;
 extern int servo1_pwm;
 extern int servo2_pwm;
 extern char mode;
+extern int servo_mode;
+
 #if MENU_FRAME_EN==1
 //ªÊ÷∆…„œÒÕ∑ÕºœÒ  
 void Draw_PIC(unsigned char x0, unsigned char y0, unsigned char x1, unsigned char y1, unsigned char bmp[])
@@ -137,6 +139,8 @@ void SaveParameter(void)
 	my_cnf[13].f = M2PID.Proportion;
 	my_cnf[14].f = M2PID.Integral;
 	my_cnf[15].f = M2PID.Derivative;
+	my_cnf[16].f = servo_offset1;
+	my_cnf[17].f = servo_offset2;
 //	my_cnf[13].f = SPEED_CONTROL_D;
 //	my_cnf[14].f = DIRECTION_CONTROL_P;
 //	my_cnf[15].f = DIRECTION_CONTROL_D;
@@ -175,7 +179,13 @@ __M_PAGE(UI_List,"CAUC-Readme",PAGE_NULL,
 	//SOLGUI_Widget_OptionText(7, "Angle:   %f ", g_AngleOfCar);
 	SOLGUI_Widget_OptionText(4, "x:   %d ", g_ball_x);
     SOLGUI_Widget_OptionText(5, "y:   %d ", g_ball_y);
-	SOLGUI_Widget_Spin(6, "mode", INT16, 0, 2, &mode);
+	SOLGUI_Widget_Spin(6, "mode", INT16, 1, 20, &mode);
+	SOLGUI_Widget_Spin(7, "ser_mode", INT16, 0, 2, &servo_mode);
+	SOLGUI_Widget_Spin(8, "servo1", INT32, -10000, 10000, &servo_offset1);
+	SOLGUI_Widget_Spin(9, "servo2", INT32, -10000, 10000, &servo_offset2);
+	SOLGUI_Widget_OptionText(10, "x:   %f ", M1PID.SetPoint);
+	SOLGUI_Widget_OptionText(11, "y:   %f ", M2PID.SetPoint);
+	SOLGUI_Widget_OptionText(12, "T:   %d ", timeCount);
 //	SOLGUI_Widget_Spin(4, "PWM1_test", INT16, -10000, 10000, &servo1_pwm);
 //	SOLGUI_Widget_Spin(5, "PWM1_test", INT16, -10000, 10000, &servo2_pwm);
 	//SOLGUI_Widget_Spin(8, "CarStop", INT8, 0, 1, &Flag_Stop);			

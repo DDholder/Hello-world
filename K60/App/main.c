@@ -66,7 +66,10 @@ int16 point_temp[2];
 int16 point_temp1[2];
 int time_cnt = 0;
 
-int mode = 0;
+int mode = 1;
+int servo_mode = 0;
+int servo_offset1 = 0;
+int servo_offset2 = 0;
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 /*!
  *  @brief      main函数
@@ -154,7 +157,7 @@ void main()
 	set_irq_priority(UART3_RX_TX_VECTORn, 2);
 
 	//set_vector_handler(PORTA_VECTORn, PORTA_IRQHandler); 
-	//set_vector_handler(DMA0_VECTORn, DMA0_IRQHandler); 	
+	//set_vector_handler(DMA0_VECTORn ,  DMA0_IRQHandler); 	
 	set_vector_handler(UART3_RX_TX_VECTORn, uart3_handler);   // 设置中断服务函数到中断向量表里
 	uart_rx_irq_en(UART3);                                    //开串口接收中断
 	/*    初始化PIT定时器中断    */
@@ -204,26 +207,54 @@ void PIT0_IRQHandler(void)
 {
 	point[0] = g_ball_x;
 	point[1] = g_ball_y;
-	if (mode == 0)
+	pos_ball.x = g_ball_x;
+	pos_ball.y = g_ball_y;
+	Task_program(mode);					//选择模式
+	//Task_Confirmed_Target(mode);
+	// Task_Move_Around();
+	M1PID.SetPoint = pos_set[pos_out_ID.y][pos_out_ID.x].x;
+	M2PID.SetPoint = pos_set[pos_out_ID.y][pos_out_ID.x].y;
+// 	M1PID.SetPoint = 98;
+// 	M2PID.SetPoint = 100;
+// 	if (mode == 0)
+// 	{
+// 		M1PID.SetPoint = 92;  //81;
+// 		M2PID.SetPoint = 160; // 99;
+// 	}
+// 	else
+// 	{
+// 		M1PID.SetPoint = 92;
+// 		M2PID.SetPoint = 93;
+// 	}
+	if (servo_mode == 0)
 	{
-		M1PID.SetPoint = 14;//81;
-		M2PID.SetPoint = 100;// 99;
-	}
-	else
+		servo1_pwm = PID_M1_PosLocCalc(point[0]);
+		servo2_pwm = PID_M2_PosLocCalc(point[1]);
+		servo1_pwm = servo1_pwm >= 1200 ? 1200 : servo1_pwm;
+		servo1_pwm = servo1_pwm <= -1200 ? -1200 : servo1_pwm;
+		servo2_pwm = servo2_pwm >= 1200 ? 1200 : servo2_pwm;
+		servo2_pwm = servo2_pwm <= -1200 ? -1200 : servo2_pwm;
+		/*ftm_pwm_duty(FTM3, FTM_CH2, 4700 - servo_offset1 + servo2_pwm);
+		ftm_pwm_duty(FTM3, FTM_CH3, 4700 - servo_offset2 + servo1_pwm);
+		ftm_pwm_duty(FTM3, FTM_CH1, 4700 - servo_offset1 + servo2_pwm);
+		ftm_pwm_duty(FTM3, FTM_CH0, 4700 - servo_offset2 + servo1_pwm);*/
+		/*version for djh*/
+		ftm_pwm_duty(FTM3, FTM_CH2, 4700 - servo_offset1 + servo2_pwm);
+		ftm_pwm_duty(FTM3, FTM_CH3, 4700 - servo_offset2 + servo1_pwm);
+		ftm_pwm_duty(FTM3, FTM_CH1, 4700 - servo_offset1 + servo2_pwm);
+		ftm_pwm_duty(FTM3, FTM_CH0, 4700 - servo_offset2 + servo1_pwm);
+	}else
 	{
-		M1PID.SetPoint = 81;
-		M2PID.SetPoint = 99;
+		ftm_pwm_duty(FTM3, FTM_CH1, 4700 - servo_offset1);
+		ftm_pwm_duty(FTM3, FTM_CH0, 4700 -servo_offset2);
+		ftm_pwm_duty(FTM3, FTM_CH2, 4700- servo_offset1);
+		ftm_pwm_duty(FTM3, FTM_CH3, 4700- servo_offset2);
 	}
-	servo1_pwm = PID_M1_PosLocCalc(point[0]);
-	servo2_pwm = PID_M2_PosLocCalc(point[1]);
-	servo1_pwm = servo1_pwm >= 1200 ? 1200 : servo1_pwm;
-	servo1_pwm = servo1_pwm <= -1200 ? -1200 : servo1_pwm;
-	servo2_pwm = servo2_pwm >= 1200 ? 1200 : servo2_pwm;
-	servo2_pwm = servo2_pwm <= -1200 ? -1200 : servo2_pwm;
 //	ftm_pwm_duty(FTM3, FTM_CH2, 4800 + servo2_pwm);
 //	ftm_pwm_duty(FTM3, FTM_CH3, 4500 + servo1_pwm);
-	ftm_pwm_duty(FTM3, FTM_CH2, 5450 + servo2_pwm);
-	ftm_pwm_duty(FTM3, FTM_CH3, 5200 + servo1_pwm);
+// 	ftm_pwm_duty(FTM3, FTM_CH2, 5450 + servo2_pwm);
+// 	ftm_pwm_duty(FTM3, FTM_CH3, 5200 + servo1_pwm);
+	
 	PIT_Flag_Clear(PIT0); //清中断标志位
 }
 

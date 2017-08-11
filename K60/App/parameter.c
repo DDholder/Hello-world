@@ -72,6 +72,8 @@ void parameter_init(void)
 		M2PID.Proportion = my_cnf[13].f;
 		M2PID.Integral = my_cnf[14].f;
 		M2PID.Derivative = my_cnf[15].f;
+		servo_offset1 = my_cnf[16].f;
+		servo_offset2 = my_cnf[17].f;
 //	String_Angle_D = my_cnf[7].f;
 //	String_Gyro_P = my_cnf[8].f;
 //	String_Gyro_I = my_cnf[9].f;
