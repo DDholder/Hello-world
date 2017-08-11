@@ -234,10 +234,10 @@ void PIT0_IRQHandler(void)
 		servo1_pwm = servo1_pwm <= -1200 ? -1200 : servo1_pwm;
 		servo2_pwm = servo2_pwm >= 1200 ? 1200 : servo2_pwm;
 		servo2_pwm = servo2_pwm <= -1200 ? -1200 : servo2_pwm;
-		/*ftm_pwm_duty(FTM3, FTM_CH2, 4700 - servo_offset1 + servo2_pwm);
-		ftm_pwm_duty(FTM3, FTM_CH3, 4700 - servo_offset2 + servo1_pwm);
-		ftm_pwm_duty(FTM3, FTM_CH1, 4700 - servo_offset1 + servo2_pwm);
-		ftm_pwm_duty(FTM3, FTM_CH0, 4700 - servo_offset2 + servo1_pwm);*/
+		//ftm_pwm_duty(FTM3, FTM_CH2, 4700 + servo_offset1 + servo2_pwm);
+		//ftm_pwm_duty(FTM3, FTM_CH3, 4700 + servo_offset2 + servo1_pwm);
+		//ftm_pwm_duty(FTM3, FTM_CH1, 4700 + servo_offset1 + servo2_pwm);
+		//ftm_pwm_duty(FTM3, FTM_CH0, 4700 + servo_offset2 + servo1_pwm);
 		/*version for djh*/
 		ftm_pwm_duty(FTM3, FTM_CH2, 4700 - servo_offset1 + servo2_pwm);
 		ftm_pwm_duty(FTM3, FTM_CH3, 4700 - servo_offset2 + servo1_pwm);
@@ -245,10 +245,15 @@ void PIT0_IRQHandler(void)
 		ftm_pwm_duty(FTM3, FTM_CH0, 4700 - servo_offset2 + servo1_pwm);
 	}else
 	{
+		/*ftm_pwm_duty(FTM3, FTM_CH1, 4700 + servo_offset1);
+		ftm_pwm_duty(FTM3, FTM_CH0, 4700 + servo_offset2);
+		ftm_pwm_duty(FTM3, FTM_CH2, 4700 + servo_offset1);
+		ftm_pwm_duty(FTM3, FTM_CH3, 4700 + servo_offset2);*/
+		/*version for djh*/
 		ftm_pwm_duty(FTM3, FTM_CH1, 4700 - servo_offset1);
-		ftm_pwm_duty(FTM3, FTM_CH0, 4700 -servo_offset2);
-		ftm_pwm_duty(FTM3, FTM_CH2, 4700- servo_offset1);
-		ftm_pwm_duty(FTM3, FTM_CH3, 4700- servo_offset2);
+		ftm_pwm_duty(FTM3, FTM_CH0, 4700 - servo_offset2);
+		ftm_pwm_duty(FTM3, FTM_CH2, 4700 - servo_offset1);
+		ftm_pwm_duty(FTM3, FTM_CH3, 4700 - servo_offset2);
 	}
 //	ftm_pwm_duty(FTM3, FTM_CH2, 4800 + servo2_pwm);
 //	ftm_pwm_duty(FTM3, FTM_CH3, 4500 + servo1_pwm);

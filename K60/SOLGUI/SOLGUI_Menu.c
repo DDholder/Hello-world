@@ -28,6 +28,8 @@ extern int servo2_pwm;
 extern char mode;
 extern int servo_mode;
 
+int aa, ss, dd, ff, gg, hh, jj, kk;
+
 #if MENU_FRAME_EN==1
 //绘制摄像头图像  
 void Draw_PIC(unsigned char x0, unsigned char y0, unsigned char x1, unsigned char y1, unsigned char bmp[])
@@ -158,6 +160,21 @@ void SaveParameter(void)
 void run(void)
 {
 }
+
+void set_abcd(void)
+{
+		pos_set_IDs[0].x = aa 	;
+		pos_set_IDs[0].y =ss	;
+		pos_set_IDs[1].x = dd;
+		pos_set_IDs[1].y = ff;
+		pos_set_IDs[2].x =gg	;
+		pos_set_IDs[2].y =hh	;
+		pos_set_IDs[3].x = jj;
+		pos_set_IDs[3].y = kk;
+		SOLGUI_Widget_OptionText(9, "SET OK!");
+		DELAY_MS(500);
+
+}
 //##############################【自定义页面】##############################
 MENU_PAGE UI_List;MENU_PAGE UI_image_show;MENU_PAGE UI_Dataview;MENU_PAGE UI_Debug;    
 MENU_PAGE UI_image_correct;
@@ -179,7 +196,7 @@ __M_PAGE(UI_List,"CAUC-Readme",PAGE_NULL,
 	//SOLGUI_Widget_OptionText(7, "Angle:   %f ", g_AngleOfCar);
 	SOLGUI_Widget_OptionText(4, "x:   %d ", g_ball_x);
     SOLGUI_Widget_OptionText(5, "y:   %d ", g_ball_y);
-	SOLGUI_Widget_Spin(6, "mode", INT16, 1, 20, &mode);
+	SOLGUI_Widget_Spin(6, "mode", INT16, 1, 8, &mode);
 	SOLGUI_Widget_Spin(7, "ser_mode", INT16, 0, 2, &servo_mode);
 	SOLGUI_Widget_Spin(8, "servo1", INT32, -10000, 10000, &servo_offset1);
 	SOLGUI_Widget_Spin(9, "servo2", INT32, -10000, 10000, &servo_offset2);
@@ -224,8 +241,18 @@ SOLGUI_Widget_OptionText(5, "Y%d", servo2_pwm);
 //SOLGUI_DrawPoint(point[1], point[2], 0);
 });
 
-__M_PAGE(UI_image_correct, "correct", &UI_List,
+__M_PAGE(UI_image_correct, "SET_ABCD", &UI_List,
 {
+	SOLGUI_Cursor(6, 0, 16);
+SOLGUI_Widget_Spin(0, "Ax", INT16, 0, 4, &aa);
+SOLGUI_Widget_Spin(1, "AY", INT16, 0, 4, &ss);
+SOLGUI_Widget_Spin(2, "Bx", INT16, 0, 4, &dd);
+SOLGUI_Widget_Spin(3, "By", INT16, 0, 4, &ff);
+SOLGUI_Widget_Spin(4, "Cx", INT16, 0, 4, &gg);
+SOLGUI_Widget_Spin(5, "Cy", INT16, 0, 4, &hh);
+SOLGUI_Widget_Spin(6, "Dx", INT16, 0, 4, &jj);
+SOLGUI_Widget_Spin(7, "Dx", INT16, 0, 4, &kk);
+SOLGUI_Widget_Button(8, "SetABCD", set_abcd);
 	// 	img[20][40] =  0;
 	// 	img[20][120] = 0;
 	// 	img[100][40] = 0;
@@ -240,12 +267,12 @@ __M_PAGE(UI_image_correct, "correct", &UI_List,
 	// 	img[102][120] = 0;
 	//Draw_PIC_correct(0,0,127,63,bmp_buff);
 //SOLGUI_Widget_OptionText(1, "ERR %d ", ttt_cnt);
-SOLGUI_Cursor(6, 0, 16);
-SOLGUI_Widget_Button(4, "Save", SaveParameter);
-SOLGUI_Widget_Spin(5, "x", INT16, 0, 159, &x_x);
-SOLGUI_Widget_Spin(6, "y", INT16, 0, 119, &x_y);
-SOLGUI_Widget_OptionText(7, "mid_x:   %d ", g_ball_x);
-SOLGUI_Widget_OptionText(8, "mid_y:   %d ", g_ball_y);
+
+// SOLGUI_Widget_Button(4, "Save", SaveParameter);
+// SOLGUI_Widget_Spin(5, "x", INT16, 0, 159, &x_x);
+// SOLGUI_Widget_Spin(6, "y", INT16, 0, 119, &x_y);
+// SOLGUI_Widget_OptionText(7, "mid_x:   %d ", g_ball_x);
+// SOLGUI_Widget_OptionText(8, "mid_y:   %d ", g_ball_y);
 //SOLGUI_DrawPoint(point[1], point[2], 0);
 });
 //-----------------------
