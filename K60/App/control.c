@@ -295,7 +295,30 @@ void Task_Move_Around()
 //ÆäËû
 void Task_Advance()
 {
-
+	location pos_set_temp_IDs[5] = {
+		{ 0,2 },{ 4,2 },{ 0,4 },{ 2,0 },{ 4,4 }
+	};
+	if (step == 0)
+	{
+		pos_set_ID = pos_set_temp_IDs[0];
+		pos_now_ID = pos_set_temp_IDs[0];
+	}
+	else
+		pos_set_ID = pos_set_temp_IDs[step%5];
+	pos_out_ID = pos_set_ID;
+	if (CheckLocation(pos_out_ID))
+	{
+		step++;
+		pos_now_ID = pos_out_ID;
+		if (pos_out_ID.x == pos_set_temp_IDs[0].x&&pos_out_ID.y == pos_set_temp_IDs[0].y)
+		{
+			time_cnt_en = 1;
+		}
+		if (pos_out_ID.x == 4 && pos_out_ID.y == 4 && step >= 16)
+		{
+			time_cnt_en = 0;
+		}
+	}
 }
 //taskMode:
 //			1:»ù´¡1
