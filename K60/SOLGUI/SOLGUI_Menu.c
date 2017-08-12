@@ -163,6 +163,7 @@ void SaveParameter(void)
 		my_cnf[33].f = offset_image[15];
 		my_cnf[34].f = offset_image[16];
 		my_cnf[35].f = offset_image[17];
+		my_cnf[36].f = done_stop;
 //	my_cnf[13].f = SPEED_CONTROL_D;
 //	my_cnf[14].f = DIRECTION_CONTROL_P;
 //	my_cnf[15].f = DIRECTION_CONTROL_D;
@@ -203,6 +204,12 @@ void save_offset(void)
 {
 	offset_image[2* img_offset_num - 2] = g_ball_x;
 	offset_image[2* img_offset_num -1]  = g_ball_y;
+	DELAY_MS(50);
+	img_offset_num++;
+	if(img_offset_num>=9)
+	{
+		img_offset_num = 9;
+	}
 }
 //##############################【自定义页面】##############################
 MENU_PAGE UI_List;MENU_PAGE UI_image_show;MENU_PAGE UI_Dataview;MENU_PAGE UI_Debug;    
@@ -233,7 +240,9 @@ __M_PAGE(UI_List,"CAUC-Readme",PAGE_NULL,
 	SOLGUI_Widget_Spin(10, "servo2", INT32, -10000, 10000, &servo_offset2);
 	SOLGUI_Widget_OptionText(11, "x:   %f ", M1PID.SetPoint);
 	SOLGUI_Widget_OptionText(12, "y:   %f ", M2PID.SetPoint);
-	SOLGUI_Widget_GotoPage(13, &UI_image_show);
+	
+	SOLGUI_Widget_Spin(13, "donestop", INT32, 0, 1, &done_stop);
+	SOLGUI_Widget_GotoPage(14, &UI_image_show);
 //	SOLGUI_Widget_OptionText(13, "T:   %d ", timeCount);
 //	SOLGUI_Widget_Spin(4, "PWM1_test", INT16, -10000, 10000, &servo1_pwm);
 //	SOLGUI_Widget_Spin(5, "PWM1_test", INT16, -10000, 10000, &servo2_pwm);
@@ -257,6 +266,8 @@ __M_PAGE(UI_image_show,"offset",&UI_List,
 	SOLGUI_Widget_OptionText(5, "%d,%d %d,%d %d,%d ", offset_image[6], offset_image[7], offset_image[8], offset_image[9], offset_image[10], offset_image[11]);
 	SOLGUI_Widget_OptionText(6, "%d,%d%d,%d%d,%d ", offset_image[12], offset_image[13], offset_image[14], offset_image[15], offset_image[16], offset_image[17]);
 	SOLGUI_Widget_Button(7, "SavePara", SaveParameter);
+
+	SOLGUI_Widget_Spin(9, "stoptime", INT32, 0, 10000, &stop_time);
 // 	img[20][40] =  0;
 // 	img[20][120] = 0;
 // 	img[100][40] = 0;

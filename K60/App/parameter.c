@@ -92,7 +92,7 @@ void parameter_init(void)
 			offset_image[15] = my_cnf[33].f ;
 			offset_image[16] = my_cnf[34].f ;
 			offset_image[17] = my_cnf[35].f ;
-
+			done_stop		 = my_cnf[36].f ;
 			pos_set[0][0].x = offset_image[0];
 			pos_set[0][0].y = offset_image[1];
 			pos_set[0][2].x = offset_image[2];
@@ -111,6 +111,7 @@ void parameter_init(void)
 			pos_set[4][2].y = offset_image[15];
 			pos_set[4][4].x = offset_image[16];
 			pos_set[4][4].y = offset_image[17];
+			
 //	String_Angle_D = my_cnf[7].f;
 //	String_Gyro_P = my_cnf[8].f;
 //	String_Gyro_I = my_cnf[9].f;

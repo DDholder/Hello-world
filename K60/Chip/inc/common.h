@@ -32,6 +32,8 @@ extern float time_cnt_5ms;    //5ms计时
 extern float time_cnt_s;  //100ms计时
 extern int  time_cnt_en;      //计时使能
 extern int  offset_image[18];
+extern int  done_stop;
+extern int  stop_time;
 
 #define    ON           0
 #define    OFF  		1

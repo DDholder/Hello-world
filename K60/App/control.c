@@ -12,14 +12,14 @@ location pos_ball;
 // 
 // };
 location pos_set[5][5] = {
-	{ { 32,32 },{ 0,0 },{ 98,32 },{ 0,0 },{ 164,33 } },
-	{ { 0,0 },{ 62,134 },{ 0,0 },{ 61,60 },{ 0,0 } },
-	{ { 31,98 },{ 0,0 },{ 97,100 },{ 0,0 },{ 164,100 } },
-	{ { 0,0 },{ 133,134 },{ 0,0 },{ 135,62 },{ 0,0 } },
-	{ { 31,162 },{ 0,0 },{ 96,165 },{ 0,0 },{ 161,164 } },
+	{ {26,28},{0,0},  {94,26}, {0,0},    {161,28} },
+	{ { 0,0 },{61,137},{ 0,0 }, {64,62}, { 0,0 }    },
+	{ { 25,94 },{ 0,0 }, { 93,93 },{ 0,0 },   { 161,94 } },
+	{ { 0,0 },{ 132,135 },{ 0,0 },{ 135,63 },{ 0,0 } },
+	{ { 26,159 },{ 0,0 },{ 93,161 },{ 0,0 },{ 160,160 } },
 };
 location pos_set_ID = { 4,2 }, pos_now_ID = { 0,0 }, pos_out_ID = { 0,0 };
-location pos_set_IDs[4] = { {2,2},{0,4},{2,0},{4,4} };
+location pos_set_IDs[4] ={{2,2},{0,4},{2,0},{4,4}};
 int timeCount = 0;
 int step = 0;
 int taskMode_last;       //判断状态改变
@@ -89,9 +89,9 @@ void Correct_Mid(int nowMidX, int nowMidY)
 //需更新pos_ball
 int CheckLocation(location SetPosID)
 {
-
-	if (ABS(pos_set[SetPosID.y][SetPosID.x].x - pos_ball.x)
-		+ ABS(pos_set[SetPosID.y][SetPosID.x].y - pos_ball.y) < 12)
+	
+	if ((pos_set[SetPosID.y][SetPosID.x].x - pos_ball.x)*(pos_set[SetPosID.y][SetPosID.x].x - pos_ball.x)
+		+(pos_set[SetPosID.y][SetPosID.x].y - pos_ball.y)*(pos_set[SetPosID.y][SetPosID.x].y - pos_ball.y) < 25)
 	{
 		timeCount++;
 	}
@@ -99,9 +99,9 @@ int CheckLocation(location SetPosID)
 	{
 		timeCount = 0;
 	}
-	if (SetPosID.y % 2 != 0)
+	if(SetPosID.y%2!=0)
 	{
-		if (timeCount > 100)
+		if (timeCount > 50)
 		{
 			timeCount = 0;
 			return 1;
@@ -110,7 +110,7 @@ int CheckLocation(location SetPosID)
 	}
 	else
 	{
-		if (timeCount > 500)			//3秒时间到
+		if (timeCount > stop_time)			//3秒时间到
 		{
 			timeCount = 0;
 			return 1;
@@ -196,7 +196,7 @@ void Task_Confirmed_Target(int taskMode)
 	}
 	if (step == 0)
 	{
-		pos_now_ID = pos_set_temp_IDs[0];
+		pos_now_ID= pos_set_temp_IDs[0];
 	}
 	pos_set_ID = pos_set_temp_IDs[step];
 	//pos_set_ID.x = pos_set[2][0].x;
@@ -204,28 +204,41 @@ void Task_Confirmed_Target(int taskMode)
 	pos_out_ID = SelectTarget(pos_now_ID, pos_set_ID);
 	if (CheckLocation(pos_out_ID))
 	{
-		if (step < 3)step++;
-		pos_now_ID = pos_out_ID;
 
-		if (pos_out_ID.x == pos_set_temp_IDs[0].x&&pos_out_ID.y == pos_set_temp_IDs[0].y)
-		{
-			time_cnt_en = 1;
-		}
-		if (pos_out_ID.x == pos_set_temp_IDs[3].x&&pos_out_ID.y == pos_set_temp_IDs[3].y)
-		{
-			time_cnt_en = 0;
-		}
+			if (step < 3)step++;
+			pos_now_ID = pos_out_ID;
+
+				if(pos_out_ID.x == pos_set_temp_IDs[0].x&&pos_out_ID.y == pos_set_temp_IDs[0].y)
+				{
+					beep_time = 50;
+					time_cnt_en = 1;
+				}
+				if (pos_out_ID.x == pos_set_temp_IDs[3].x&&pos_out_ID.y == pos_set_temp_IDs[3].y)
+				{
+					if(taskMode==1)
+					{
+						if(time_cnt_s>=8)
+						{
+							beep_time = 50;
+							time_cnt_en = 0;
+						}
+					}
+					else {
+						beep_time = 50;
+						time_cnt_en = 0;
+					}
+				}
 	}
-	// 	if(step >=3)
-	// 	{
-	// 		time_cnt_en = 0;   //停止计时
-	// 	}
+// 	if(step >=3)
+// 	{
+// 		time_cnt_en = 0;   //停止计时
+// 	}
 }
 //发挥2
 void Task_Changed_Target()
 {
 	//static int step = 0;
-
+	
 	if (step == 0)
 	{
 		pos_now_ID = pos_set_IDs[0];
@@ -237,22 +250,24 @@ void Task_Changed_Target()
 		if (pos_out_ID.y % 2 == 0)
 		{
 			if (step < 3)step++;
-
+			
 		}
 		pos_now_ID = pos_out_ID;
 		if (pos_out_ID.x == pos_set_IDs[0].x&&pos_out_ID.y == pos_set_IDs[0].y)
 		{
+			beep_time = 50;
 			time_cnt_en = 1;
 		}
 		if (pos_out_ID.x == pos_set_IDs[3].x&&pos_out_ID.y == pos_set_IDs[3].y&&step >= 3)
 		{
+			beep_time = 50;
 			time_cnt_en = 0;
 		}
 	}
-	// 	if (step >= 3)
-	// 	{
-	// 		time_cnt_en = 0;   //停止计时
-	// 	}
+// 	if (step >= 3)
+// 	{
+// 		time_cnt_en = 0;   //停止计时
+// 	}
 }
 //发挥3
 void Task_Move_Around()
@@ -279,46 +294,25 @@ void Task_Move_Around()
 		pos_now_ID = pos_out_ID;
 		if (pos_out_ID.x == pos_set_temp_IDs[0].x&&pos_out_ID.y == pos_set_temp_IDs[0].y)
 		{
+			beep_time = 50;
 			time_cnt_en = 1;
 		}
-		if (pos_out_ID.x == 4 && pos_out_ID.y == 4 && step >= 16)
+		if (pos_out_ID.x == 4&&pos_out_ID.y == 4&&step >= 16)
 		{
+			beep_time = 50;
 			time_cnt_en = 0;
 		}
 	}
-	// 	if (step >= 16)
-	// 	{
-	// 		time_cnt_en = 0;   //停止计时
-	// 	}
+// 	if (step >= 16)
+// 	{
+// 		time_cnt_en = 0;   //停止计时
+// 	}
 }
 
 //其他
 void Task_Advance()
 {
-	location pos_set_temp_IDs[5] = {
-		{ 0,2 },{ 4,2 },{ 0,4 },{ 2,0 },{ 4,4 }
-	};
-	if (step == 0)
-	{
-		pos_set_ID = pos_set_temp_IDs[0];
-		pos_now_ID = pos_set_temp_IDs[0];
-	}
-	else
-		pos_set_ID = pos_set_temp_IDs[step%5];
-	pos_out_ID = pos_set_ID;
-	if (CheckLocation(pos_out_ID))
-	{
-		step++;
-		pos_now_ID = pos_out_ID;
-		if (pos_out_ID.x == pos_set_temp_IDs[0].x&&pos_out_ID.y == pos_set_temp_IDs[0].y)
-		{
-			time_cnt_en = 1;
-		}
-		if (pos_out_ID.x == 4 && pos_out_ID.y == 4 && step >= 16)
-		{
-			time_cnt_en = 0;
-		}
-	}
+
 }
 //taskMode:
 //			1:基础1

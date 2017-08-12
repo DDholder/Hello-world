@@ -76,6 +76,8 @@ float time_cnt_5ms = 0;    //5ms计时
 float time_cnt_s = 0;  //100ms计时
 int  time_cnt_en = 0;      //计时使能
 int  offset_image[18] = {0};   //点矫正数组
+int  done_stop = 0;     //  完成后是否停止   
+int stop_time = 500;
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 /*!
  *  @brief      main函数
@@ -186,7 +188,7 @@ void main()
 		//发送山外上位机参数
 		//if (vcan_send_flag == 1)
 		//{
-		//vcan_sendware((uint8_t *)vcan_send_buff, sizeof(vcan_send_buff));
+		vcan_sendware((uint8_t *)vcan_send_buff, sizeof(vcan_send_buff));
 		//}
 // 		ftm_pwm_duty(FTM3, FTM_CH0, 200);
 // 		ftm_pwm_duty(FTM3, FTM_CH1, 200);
@@ -233,10 +235,10 @@ void img_data_refresh(void)
 *  @note
 */
 int sendCount = 0;
-u8 data[4] = {0xff,0xee,0x00,0x00};
+u8 data[4] = { 0xff,0xee,0x00,0x00 };
 void PIT0_IRQHandler(void)
 {
-	if(time_cnt_en==1)
+	if(time_cnt_en==1&&servo_mode==0)
 	{
 		time_cnt_5ms++;
 		if(time_cnt_5ms>=20)   //0.1s时间
@@ -254,6 +256,15 @@ void PIT0_IRQHandler(void)
 	// Task_Move_Around();
 	M1PID.SetPoint = pos_set[pos_out_ID.y][pos_out_ID.x].x;
 	M2PID.SetPoint = pos_set[pos_out_ID.y][pos_out_ID.x].y;
+	if (sendCount < 10)sendCount++;
+	else
+	{
+		data[2] = pos_ball.x;
+		data[3] = pos_ball.y;
+		//uart_putbuff(UART3, data, sizeof(data));
+		printf("%s", data);
+		sendCount = 0;
+	}
 // 	M1PID.SetPoint = 98;
 // 	M2PID.SetPoint = 100;
 // 	if (mode == 0)
@@ -266,15 +277,6 @@ void PIT0_IRQHandler(void)
 // 		M1PID.SetPoint = 92;
 // 		M2PID.SetPoint = 93;
 // 	}
-	if (sendCount < 10)sendCount++;
-	else
-	{
-		data[2] = pos_ball.x;
-		data[3] = pos_ball.y;
-		//uart_putbuff(UART3, data, sizeof(data));
-		printf("%s", data);
-		sendCount = 0;
-	}
 	if (servo_mode == 0)
 	{
 		servo1_pwm = PID_M1_PosLocCalc(point[0]);
@@ -294,16 +296,36 @@ void PIT0_IRQHandler(void)
 		ftm_pwm_duty(FTM3, FTM_CH0, 4700 - servo_offset2 + servo1_pwm);
 	}else
 	{
-		/*ftm_pwm_duty(FTM3, FTM_CH1, 4700 + servo_offset1);
-		ftm_pwm_duty(FTM3, FTM_CH0, 4700 + servo_offset2);
-		ftm_pwm_duty(FTM3, FTM_CH2, 4700 + servo_offset1);
-		ftm_pwm_duty(FTM3, FTM_CH3, 4700 + servo_offset2);*/
-		/*version for djh*/
+		//ftm_pwm_duty(FTM3, FTM_CH1, 4700 + servo_offset1);
+		//ftm_pwm_duty(FTM3, FTM_CH0, 4700 + servo_offset2);
+		//ftm_pwm_duty(FTM3, FTM_CH2, 4700 + servo_offset1);
+		//ftm_pwm_duty(FTM3, FTM_CH3, 4700 + servo_offset2);
 		ftm_pwm_duty(FTM3, FTM_CH1, 4700 - servo_offset1);
 		ftm_pwm_duty(FTM3, FTM_CH0, 4700 - servo_offset2);
 		ftm_pwm_duty(FTM3, FTM_CH2, 4700 - servo_offset1);
 		ftm_pwm_duty(FTM3, FTM_CH3, 4700 - servo_offset2);
 	}
+	if (done_stop == 1)
+	{
+		if (time_cnt_en == 0 && time_cnt_s != 0)
+		{
+			ftm_pwm_duty(FTM3, FTM_CH1, 4700 - servo_offset1);
+			ftm_pwm_duty(FTM3, FTM_CH0, 4700 - servo_offset2);
+			ftm_pwm_duty(FTM3, FTM_CH2, 4700 - servo_offset1);
+			ftm_pwm_duty(FTM3, FTM_CH3, 4700 - servo_offset2);
+		}
+	}
+
+ 			if(beep_time>0)
+ 			{
+ 				gpio_init(Beep, GPO, 0); //开蜂鸣器 
+ 				beep_time--;
+ 			}
+			 			else
+			 			{
+			 				gpio_init(Beep, GPO, 1); //关蜂鸣器
+			 				beep_time = 0;
+			 			}
 //	ftm_pwm_duty(FTM3, FTM_CH2, 4800 + servo2_pwm);
 //	ftm_pwm_duty(FTM3, FTM_CH3, 4500 + servo1_pwm);
 // 	ftm_pwm_duty(FTM3, FTM_CH2, 5450 + servo2_pwm);

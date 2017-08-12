@@ -259,13 +259,36 @@ int main(void)
 
 	if(0)jpeg_test();
 	pwmx=offset_X;
+	LCD_Draw_Circle(32, 164, 12);
+	LCD_ShowNum(32-6, 164-6, 1, 3, 16);
+	LCD_Draw_Circle(30, 99, 12);
+	LCD_ShowNum(30 - 6, 99 - 6, 2, 3, 16);
+	LCD_Draw_Circle(31, 34, 12);
+	LCD_ShowNum(31 - 6, 34 - 6, 3, 3, 16);
+	LCD_Draw_Circle(97, 164, 12);
+	LCD_ShowNum(97 - 6, 164 - 6, 4, 3, 16);
+	LCD_Draw_Circle(98, 99, 12);
+	LCD_ShowNum(98 - 6, 99 - 6, 5, 3, 16);
+	LCD_Draw_Circle(96, 31, 12);
+	LCD_ShowNum(96 - 6, 31 - 6, 6, 3, 16);
+	LCD_Draw_Circle(163, 162, 12);
+	LCD_ShowNum(163 - 6, 162 - 6, 7, 3, 16);
+	LCD_Draw_Circle(164, 98, 12);
+	LCD_ShowNum(164 - 6, 98 - 6, 8, 3, 16);
+	LCD_Draw_Circle(163, 31, 12);
+	LCD_ShowNum(163 - 6, 31 - 6, 9, 3, 16);
+	LCD_ShowString(10, 220, 200, 16, 16, "Renesas Cup");
+	LCD_ShowString(5, 240, 4, 16, 16, "X:");
+	LCD_ShowString(5, 260, 4, 16, 16, "Y:");
+	
+	//LCD_DrawRectangle(0, 0, 196, 196);
 	while (1)
 	{
 		KEY_Scan(0);
 		//LCD_Clear(WHITE);
-//		LCD_ShowNum(50, 50, g_ball_x, 3, 16);
-//		LCD_ShowNum(100, 50, g_ball_y, 3, 16);
-		LCD_DrawPoint(g_ball_x, g_ball_y);
+		LCD_ShowNum(10, 240, g_ball_x, 3, 16);
+		LCD_ShowNum(10, 260, g_ball_y, 3, 16);
+		LCD_Fast_DrawPoint(g_ball_x, g_ball_y,0x00ff);
 		delay_ms(10);
 	}
 	//else rgb565_test(); 

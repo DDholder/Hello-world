@@ -519,7 +519,7 @@ void LCD_Display_Dir(u8 dir)
 			lcddev.height=320; 			
 		}
 	} 
-	LCD_Scan_Dir(DFT_SCAN_DIR);	//默认扫描方向
+	LCD_Scan_Dir(3);	//默认扫描方向
 }	 
 //设置窗口,并自动设置画点坐标到窗口左上角(sx,sy).
 //sx,sy:窗口起始坐标(左上角)
