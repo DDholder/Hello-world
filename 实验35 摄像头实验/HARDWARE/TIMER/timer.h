@@ -16,5 +16,5 @@
 
 void TIM3_Int_Init(u16 arr,u16 psc);
 void TIM2_PWM_Init(u32 arr, u32 psc);
-extern int clacFlag,fps ;
+extern int clacFlag,fps,  enTimecount ,times;
 #endif

@@ -17,7 +17,8 @@
 
 extern u8 ov_frame;
 extern volatile u16 jpeg_data_len;
-
+int enTimecount = 0;
+int times = 0;
 
 //通用定时器3中断初始化
 //arr：自动重装值。
@@ -57,23 +58,14 @@ void TIM3_IRQHandler(void)
 {
 	if (TIM_GetITStatus(TIM3, TIM_IT_Update) == SET) //溢出中断
 	{
-		//if (runFlag)
-			motorRun(pwmx_set, pwmy_set);
-		if (clacFlag == 1)
-		{
-			//program_main();
-			clacFlag = 0;
-		}
-		if (count < 200)
-			count++;
+		if (count < 20)count++;
 		else
 		{
-			lastx=pwmx_set;
-			printf("frame:%d\r\n", fps);//????
-			fps = 0;
-			ov_frame = 0;
 			count = 0;
+			if (enTimecount == 1)
+				times++;
 		}
+
 		TIM_ClearITPendingBit(TIM3, TIM_IT_Update);  //清除中断标志位
 	}
 }

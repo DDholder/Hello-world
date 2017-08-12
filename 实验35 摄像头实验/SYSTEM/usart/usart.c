@@ -40,7 +40,6 @@ char  head_1 = 0;			//串口帧头识别
 char  head_2 = 0;
 char  head_3 = 0;
 char  head_4 = 0;
-
 #if 1
 #pragma import(__use_no_semihosting)             
 //标准库需要的支持函数                 
@@ -136,6 +135,10 @@ void USART1_IRQHandler(void)                	//串口1中断服务程序
 	if (USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)  //接收中断(接收到的数据必须是0x0d 0x0a结尾)
 	{
 		Res = USART_ReceiveData(USART1);//(USART1->DR);	//读取接收到的数据
+		if (Res_last == 0xaa && Res == 0xbb)
+			enTimecount = 1;
+		if (Res_last == 0xcc && Res == 0xdd)
+			enTimecount = 0;
 		if (head_1 == 0)
 		{
 
@@ -172,6 +175,7 @@ void USART1_IRQHandler(void)                	//串口1中断服务程序
 				}
 			}
 		}
+		Res_last = Res;
 #if SYSTEM_SUPPORT_OS 	//如果SYSTEM_SUPPORT_OS为真，则需要支持OS.
 	OSIntExit();
 #endif

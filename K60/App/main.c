@@ -236,6 +236,8 @@ void img_data_refresh(void)
 */
 int sendCount = 0;
 u8 data[4] = { 0xff,0xee,0x00,0x00 };
+u8 timerdata[4] = { 0xaa,0xbb,0xcc,0xdd };
+int enSend = 0;
 void PIT0_IRQHandler(void)
 {
 	if(time_cnt_en==1&&servo_mode==0)
@@ -254,6 +256,10 @@ void PIT0_IRQHandler(void)
 	Task_program(mode);					//Ñ¡ÔñÄ£Ê½
 	//Task_Confirmed_Target(mode);
 	// Task_Move_Around();
+	if (time_cnt_en == 1 && servo_mode == 0)
+		enSend = 1;
+	else
+		enSend = 0;
 	if(mode!=8)
 	{
 		M1PID.SetPoint = pos_set[pos_out_ID.y][pos_out_ID.x].x;
@@ -266,20 +272,18 @@ void PIT0_IRQHandler(void)
 		data[3] = pos_ball.y;
 		//uart_putbuff(UART3, data, sizeof(data));
 		printf("%s", data);
+		if (enSend == 1)
+		{
+			printf("%c", 0xaa);
+			printf("%c", 0xbb);
+		}
+		else
+		{
+			printf("%c", 0xcc);
+			printf("%c", 0xdd);
+		}
 		sendCount = 0;
 	}
-// 	M1PID.SetPoint = 98;
-// 	M2PID.SetPoint = 100;
-// 	if (mode == 0)
-// 	{
-// 		M1PID.SetPoint = 92;  //81;
-// 		M2PID.SetPoint = 160; // 99;
-// 	}
-// 	else
-// 	{
-// 		M1PID.SetPoint = 92;
-// 		M2PID.SetPoint = 93;
-// 	}
 	if (servo_mode == 0)
 	{
 		servo1_pwm = PID_M1_PosLocCalc(point[0]);

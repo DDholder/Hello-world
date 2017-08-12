@@ -277,17 +277,21 @@ int main(void)
 	LCD_ShowNum(164 - 6, 98 - 6, 8, 3, 16);
 	LCD_Draw_Circle(163, 31, 12);
 	LCD_ShowNum(163 - 6, 31 - 6, 9, 3, 16);
-	LCD_ShowString(10, 220, 200, 16, 16, "Renesas Cup");
+	LCD_ShowString(10, 200, 180, 16, 24, "Renesas Cup");
 	LCD_ShowString(5, 240, 4, 16, 16, "X:");
 	LCD_ShowString(5, 260, 4, 16, 16, "Y:");
-	
+	LCD_ShowString(100, 235, 50, 16, 16, "time:");
 	//LCD_DrawRectangle(0, 0, 196, 196);
 	while (1)
 	{
 		KEY_Scan(0);
 		//LCD_Clear(WHITE);
-		LCD_ShowNum(10, 240, g_ball_x, 3, 16);
-		LCD_ShowNum(10, 260, g_ball_y, 3, 16);
+		LCD_ShowNum(30, 240, g_ball_x, 3, 16);
+		LCD_ShowNum(30, 260, g_ball_y, 3, 16);
+		LCD_ShowNum(76, 250, times/10, 3, 24);
+		LCD_ShowString(124, 250, 1, 24, 24, ".");
+		LCD_ShowNum(130, 250, times % 10, 3, 24);
+		LCD_ShowString(178, 258, 50, 16, 16, "Sec");
 		LCD_Fast_DrawPoint(g_ball_x, g_ball_y,0x00ff);
 		delay_ms(10);
 	}
