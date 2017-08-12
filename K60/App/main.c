@@ -254,8 +254,11 @@ void PIT0_IRQHandler(void)
 	Task_program(mode);					//Ñ¡ÔñÄ£Ê½
 	//Task_Confirmed_Target(mode);
 	// Task_Move_Around();
-	M1PID.SetPoint = pos_set[pos_out_ID.y][pos_out_ID.x].x;
-	M2PID.SetPoint = pos_set[pos_out_ID.y][pos_out_ID.x].y;
+	if(mode!=8)
+	{
+		M1PID.SetPoint = pos_set[pos_out_ID.y][pos_out_ID.x].x;
+		M2PID.SetPoint = pos_set[pos_out_ID.y][pos_out_ID.x].y;
+	}
 	if (sendCount < 10)sendCount++;
 	else
 	{

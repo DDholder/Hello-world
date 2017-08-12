@@ -101,7 +101,7 @@ int CheckLocation(location SetPosID)
 	}
 	if(SetPosID.y%2!=0)
 	{
-		if (timeCount > 50)
+		if (timeCount > 30)
 		{
 			timeCount = 0;
 			return 1;
@@ -312,7 +312,18 @@ void Task_Move_Around()
 //ÆäËû
 void Task_Advance()
 {
-
+	location pos_set_temp_IDs[12] = {
+		{ 97,165 },{ 99,131 },{ 97,100 },{ 98,67 },{ 98,32 },
+		{ 130,102 },{ 162,164 },{ 99,131 },{ 31,100 },{ 97,65 },
+		{ 164,34 },{ 130,100 }
+	};
+	M1PID.SetPoint = pos_set_temp_IDs[step % 12].x;
+	M2PID.SetPoint = pos_set_temp_IDs[step % 12].y;
+	if ((pos_set_temp_IDs[step % 12].x - pos_ball.x)*(pos_set_temp_IDs[step % 12].x - pos_ball.x)
+		+ (pos_set_temp_IDs[step % 12].y - pos_ball.y)*(pos_set_temp_IDs[step % 12].y - pos_ball.y) < 20)
+	{
+		step++;
+	}
 }
 //taskMode:
 //			1:»ù´¡1
