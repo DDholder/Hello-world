@@ -204,7 +204,6 @@ void Task_Confirmed_Target(int taskMode)
 	pos_out_ID = SelectTarget(pos_now_ID, pos_set_ID);
 	if (CheckLocation(pos_out_ID))
 	{
-
 		if (step < 3)step++;
 		pos_now_ID = pos_out_ID;
 
