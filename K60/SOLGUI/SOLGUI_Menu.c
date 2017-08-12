@@ -28,7 +28,9 @@ extern int servo2_pwm;
 extern char mode;
 extern int servo_mode;
 
+extern int step;  //步数计数
 int aa, ss, dd, ff, gg, hh, jj, kk;
+int img_offset_num = 1;    //图像矫正点
 
 #if MENU_FRAME_EN==1
 //绘制摄像头图像  
@@ -132,7 +134,6 @@ void SaveParameter(void)
 	my_cnf[5].f = g_dirControl_P;
 	my_cnf[6].f = g_dirControl_D;
     my_cnf[7].f = g_dirControl_gyro_D;
-
 	my_cnf[8].f = (float)x_x;
 	my_cnf[9].f = (float)x_y;
 	my_cnf[10].f = M1PID.Proportion;
@@ -143,6 +144,25 @@ void SaveParameter(void)
 	my_cnf[15].f = M2PID.Derivative;
 	my_cnf[16].f = servo_offset1;
 	my_cnf[17].f = servo_offset2;
+
+		my_cnf[18].f = offset_image[0];
+		my_cnf[19].f = offset_image[1];
+		my_cnf[20].f = offset_image[2];
+		my_cnf[21].f = offset_image[3];
+		my_cnf[22].f = offset_image[4];
+		my_cnf[23].f = offset_image[5];
+		my_cnf[24].f = offset_image[6];
+		my_cnf[25].f = offset_image[7];
+		my_cnf[26].f = offset_image[8];
+		my_cnf[27].f = offset_image[9];
+		my_cnf[28].f = offset_image[10];
+		my_cnf[29].f = offset_image[11];
+		my_cnf[30].f = offset_image[12];
+		my_cnf[31].f = offset_image[13];
+		my_cnf[32].f = offset_image[14];
+		my_cnf[33].f = offset_image[15];
+		my_cnf[34].f = offset_image[16];
+		my_cnf[35].f = offset_image[17];
 //	my_cnf[13].f = SPEED_CONTROL_D;
 //	my_cnf[14].f = DIRECTION_CONTROL_P;
 //	my_cnf[15].f = DIRECTION_CONTROL_D;
@@ -159,6 +179,10 @@ void SaveParameter(void)
 }
 void run(void)
 {
+	step = 0;
+	//time_cnt_en = 1;
+	time_cnt_s = 0;
+	time_cnt_5ms = 0;     //模式改变初始化计时  
 }
 
 void set_abcd(void)
@@ -175,13 +199,19 @@ void set_abcd(void)
 		DELAY_MS(500);
 
 }
+void save_offset(void)
+{
+	offset_image[2* img_offset_num - 2] = g_ball_x;
+	offset_image[2* img_offset_num -1]  = g_ball_y;
+}
 //##############################【自定义页面】##############################
 MENU_PAGE UI_List;MENU_PAGE UI_image_show;MENU_PAGE UI_Dataview;MENU_PAGE UI_Debug;    
 MENU_PAGE UI_image_correct;
 __M_PAGE(UI_List,"CAUC-Readme",PAGE_NULL,
 {
   	SOLGUI_Cursor(6,0,16);
-	SOLGUI_Widget_GotoPage(0,&UI_image_show);
+	SOLGUI_Widget_OptionText(0, "Time:   %f ", time_cnt_s);
+	//SOLGUI_Widget_GotoPage(0,&UI_image_show);
     SOLGUI_Widget_GotoPage(1, &UI_Debug);
     SOLGUI_Widget_GotoPage(2,&UI_image_correct);
 	SOLGUI_Widget_Button(3, "SavePara", SaveParameter);
@@ -197,26 +227,36 @@ __M_PAGE(UI_List,"CAUC-Readme",PAGE_NULL,
 	SOLGUI_Widget_OptionText(4, "x:   %d ", g_ball_x);
     SOLGUI_Widget_OptionText(5, "y:   %d ", g_ball_y);
 	SOLGUI_Widget_Spin(6, "mode", INT16, 1, 8, &mode);
-	SOLGUI_Widget_Spin(7, "ser_mode", INT16, 0, 2, &servo_mode);
-	SOLGUI_Widget_Spin(8, "servo1", INT32, -10000, 10000, &servo_offset1);
-	SOLGUI_Widget_Spin(9, "servo2", INT32, -10000, 10000, &servo_offset2);
-	SOLGUI_Widget_OptionText(10, "x:   %f ", M1PID.SetPoint);
-	SOLGUI_Widget_OptionText(11, "y:   %f ", M2PID.SetPoint);
-	SOLGUI_Widget_OptionText(12, "T:   %d ", timeCount);
+	SOLGUI_Widget_Button(7, "Run", run);
+	SOLGUI_Widget_Spin(8, "ser_mode", INT16, 0, 2, &servo_mode);
+	SOLGUI_Widget_Spin(9, "servo1", INT32, -10000, 10000, &servo_offset1);
+	SOLGUI_Widget_Spin(10, "servo2", INT32, -10000, 10000, &servo_offset2);
+	SOLGUI_Widget_OptionText(11, "x:   %f ", M1PID.SetPoint);
+	SOLGUI_Widget_OptionText(12, "y:   %f ", M2PID.SetPoint);
+	SOLGUI_Widget_GotoPage(13, &UI_image_show);
+//	SOLGUI_Widget_OptionText(13, "T:   %d ", timeCount);
 //	SOLGUI_Widget_Spin(4, "PWM1_test", INT16, -10000, 10000, &servo1_pwm);
 //	SOLGUI_Widget_Spin(5, "PWM1_test", INT16, -10000, 10000, &servo2_pwm);
 	//SOLGUI_Widget_Spin(8, "CarStop", INT8, 0, 1, &Flag_Stop);			
 	//SOLGUI_Widget_Spin(9, "SpeedEN", INT8, 0, 1, &Flag_Speed);		
 	//SOLGUI_Widget_Spin(10, "DirecEN", INT8, 0, 1, &Flag_Direction);		
 	//SOLGUI_Widget_Spin(7, "motor", FLT16, -1000, 1000, &g_BlanceControlOut);
-	SOLGUI_Widget_Spin(13, "vcan_send", INT8, 0, 1, &vcan_send_flag);
+//	SOLGUI_Widget_Spin(13, "vcan_send", INT8, 0, 1, &vcan_send_flag);
 
 });
 
 //-----------------------
 
-__M_PAGE(UI_image_show,"Image",&UI_List,
+__M_PAGE(UI_image_show,"offset",&UI_List,
 {
+	SOLGUI_Cursor(6, 0, 16);
+	SOLGUI_Widget_OptionText(0, "x:%d   y:%d  ", g_ball_x, g_ball_y);
+	SOLGUI_Widget_Spin(1, "offset_num", INT16, 1, 9, &img_offset_num);
+	SOLGUI_Widget_Button(2, "confirm", save_offset);
+	SOLGUI_Widget_OptionText(4, "%d,%d %d,%d %d,%d ", offset_image[0], offset_image[1], offset_image[2], offset_image[3], offset_image[4], offset_image[5]);
+	SOLGUI_Widget_OptionText(5, "%d,%d %d,%d %d,%d ", offset_image[6], offset_image[7], offset_image[8], offset_image[9], offset_image[10], offset_image[11]);
+	SOLGUI_Widget_OptionText(6, "%d,%d%d,%d%d,%d ", offset_image[12], offset_image[13], offset_image[14], offset_image[15], offset_image[16], offset_image[17]);
+	SOLGUI_Widget_Button(7, "SavePara", SaveParameter);
 // 	img[20][40] =  0;
 // 	img[20][120] = 0;
 // 	img[100][40] = 0;
@@ -229,13 +269,13 @@ __M_PAGE(UI_image_show,"Image",&UI_List,
 // 	img[22][120] = 0;
 // 	img[102][40] = 0;
 // 	img[102][120] = 0;
-	Draw_PIC(0,0,127,63,bmp_buff);
+//	Draw_PIC(0,0,127,63,bmp_buff);
 //SOLGUI_Widget_OptionText(1, "ERR %d ", ttt_cnt);
-SOLGUI_Cursor(6, 0, 16);
-SOLGUI_Widget_OptionText(2, "X%d", point[0]);
-SOLGUI_Widget_OptionText(3, "Y%d", point[1]);
-SOLGUI_Widget_OptionText(4, "X%d", servo1_pwm);
-SOLGUI_Widget_OptionText(5, "Y%d", servo2_pwm);
+// SOLGUI_Cursor(6, 0, 16);
+// SOLGUI_Widget_OptionText(2, "X%d", point[0]);
+// SOLGUI_Widget_OptionText(3, "Y%d", point[1]);
+// SOLGUI_Widget_OptionText(4, "X%d", servo1_pwm);
+// SOLGUI_Widget_OptionText(5, "Y%d", servo2_pwm);
 // SOLGUI_Widget_Spin(4, " ", INT16, 0, 159, &x_x);
 // SOLGUI_Widget_Spin(5, " ", INT16, 0, 119, &x_y);
 //SOLGUI_DrawPoint(point[1], point[2], 0);

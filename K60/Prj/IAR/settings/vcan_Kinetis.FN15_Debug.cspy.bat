@@ -25,7 +25,7 @@ if not "%~1" == "" goto debugFile
 
 @echo on 
 
-"E:\IAR7.7\main\common\bin\cspybat" -f "F:\17国赛\Hello-world\K60\Prj\IAR\settings\vcan_Kinetis.FN15_Debug.general.xcl" --backend -f "F:\17国赛\Hello-world\K60\Prj\IAR\settings\vcan_Kinetis.FN15_Debug.driver.xcl" 
+"E:\IAR7.7\main\common\bin\cspybat" -f "F:\17国赛\backup\Hello-world\K60\Prj\IAR\settings\vcan_Kinetis.FN15_Debug.general.xcl" --backend -f "F:\17国赛\backup\Hello-world\K60\Prj\IAR\settings\vcan_Kinetis.FN15_Debug.driver.xcl" 
 
 @echo off 
 goto end 
@@ -34,7 +34,7 @@ goto end
 
 @echo on 
 
-"E:\IAR7.7\main\common\bin\cspybat" -f "F:\17国赛\Hello-world\K60\Prj\IAR\settings\vcan_Kinetis.FN15_Debug.general.xcl" "--debug_file=%~1" --backend -f "F:\17国赛\Hello-world\K60\Prj\IAR\settings\vcan_Kinetis.FN15_Debug.driver.xcl" 
+"E:\IAR7.7\main\common\bin\cspybat" -f "F:\17国赛\backup\Hello-world\K60\Prj\IAR\settings\vcan_Kinetis.FN15_Debug.general.xcl" "--debug_file=%~1" --backend -f "F:\17国赛\backup\Hello-world\K60\Prj\IAR\settings\vcan_Kinetis.FN15_Debug.driver.xcl" 
 
 @echo off 
 :end

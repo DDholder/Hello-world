@@ -34,6 +34,7 @@ void PORTA_IRQHandler(void);
 void DMA0_IRQHandler(void);
 void uart3_handler(void);
 void get_point_uart(unsigned char  c);
+void img_data_refresh(void);
 //====================参数定义========================
 //中断引用变量记得加volatile
 //只读变量记得加constant 
@@ -70,6 +71,11 @@ int mode = 1;
 int servo_mode = 0;
 int servo_offset1 = 0;
 int servo_offset2 = 0;
+
+float time_cnt_5ms = 0;    //5ms计时
+float time_cnt_s = 0;  //100ms计时
+int  time_cnt_en = 0;      //计时使能
+int  offset_image[18] = {0};   //点矫正数组
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 /*!
  *  @brief      main函数
@@ -138,6 +144,7 @@ void main()
 	printf("Flash Init......");
 	flash_init();					//初始化flash
 	parameter_init();			    //初始化参数  此处装载所有掉电不丢失参数  
+	img_data_refresh();
 	printf("OK\n");
 	/*       摄像头初始化        */
 	printf("Camera Init......");
@@ -195,7 +202,28 @@ void main()
 	}
 }
 
+void img_data_refresh(void)
+{
+	pos_set[0][0].x = offset_image[0];
+	pos_set[0][0].y = offset_image[1];
+	pos_set[0][2].x = offset_image[2];
+	pos_set[0][2].y = offset_image[3];
+	pos_set[0][4].x = offset_image[4];
+	pos_set[0][4].y = offset_image[5];
+	pos_set[2][0].x = offset_image[6];
+	pos_set[2][0].y = offset_image[7];
+	pos_set[2][2].x = offset_image[8];
+	pos_set[2][2].y = offset_image[9];
+	pos_set[2][4].x = offset_image[10];
+	pos_set[2][4].y = offset_image[11];
+	pos_set[4][0].x = offset_image[12];
+	pos_set[4][0].y = offset_image[13];
+	pos_set[4][2].x = offset_image[14];
+	pos_set[4][2].y = offset_image[15];
+	pos_set[4][4].x = offset_image[16];
+	pos_set[4][4].y = offset_image[17];
 
+}
 
 /*!
 *  @brief      PIT0中断服务函数
@@ -205,6 +233,15 @@ void main()
 */
 void PIT0_IRQHandler(void)
 {
+	if(time_cnt_en==1)
+	{
+		time_cnt_5ms++;
+		if(time_cnt_5ms>=20)   //0.1s时间
+		{
+			time_cnt_s += 0.1;
+			time_cnt_5ms = 0;
+		}
+	}
 	point[0] = g_ball_x;
 	point[1] = g_ball_y;
 	pos_ball.x = g_ball_x;

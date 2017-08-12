@@ -28,6 +28,10 @@ extern int x_x;
 extern int x_y;
 extern int servo_offset1;
 extern int servo_offset2;
+extern float time_cnt_5ms;    //5ms计时
+extern float time_cnt_s;  //100ms计时
+extern int  time_cnt_en;      //计时使能
+extern int  offset_image[18];
 
 #define    ON           0
 #define    OFF  		1

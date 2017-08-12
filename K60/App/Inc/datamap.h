@@ -1,7 +1,7 @@
 #ifndef __DATAMAP_H
 #define __DATAMAP_H
 #define PAGE_Config   (FLASH_SECTOR_NUM-1)
-#define cnf_num 40 
+#define cnf_num 50 
 extern struct datamap Config;
 extern union cnf_union my_cnf[cnf_num];    
 struct datamap
