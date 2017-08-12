@@ -2,6 +2,8 @@
 #include "control.h"
 #include "timer.h"
 #include "math.h"
+int g_ball_x = 0;
+int g_ball_y = 0;
 position pos_ball;
 position pos_set[5][5];
 position pos_add[2][2];

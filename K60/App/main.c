@@ -180,12 +180,13 @@ void main()
 	printf("**************************\n");
 	printf("Init...Over\n");
 	EnableInterrupts; //开总中断
+	servo_mode = 1;
 	while (1)
 	{
 		//发送山外上位机参数
 		//if (vcan_send_flag == 1)
 		//{
-		vcan_sendware((uint8_t *)vcan_send_buff, sizeof(vcan_send_buff));
+		//vcan_sendware((uint8_t *)vcan_send_buff, sizeof(vcan_send_buff));
 		//}
 // 		ftm_pwm_duty(FTM3, FTM_CH0, 200);
 // 		ftm_pwm_duty(FTM3, FTM_CH1, 200);
@@ -231,6 +232,8 @@ void img_data_refresh(void)
 *  @date	   20161201
 *  @note
 */
+int sendCount = 0;
+u8 data[4] = {0xff,0xee,0x00,0x00};
 void PIT0_IRQHandler(void)
 {
 	if(time_cnt_en==1)
@@ -263,6 +266,15 @@ void PIT0_IRQHandler(void)
 // 		M1PID.SetPoint = 92;
 // 		M2PID.SetPoint = 93;
 // 	}
+	if (sendCount < 10)sendCount++;
+	else
+	{
+		data[2] = pos_ball.x;
+		data[3] = pos_ball.y;
+		//uart_putbuff(UART3, data, sizeof(data));
+		printf("%s", data);
+		sendCount = 0;
+	}
 	if (servo_mode == 0)
 	{
 		servo1_pwm = PID_M1_PosLocCalc(point[0]);

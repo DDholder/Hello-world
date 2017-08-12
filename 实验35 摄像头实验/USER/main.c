@@ -262,14 +262,11 @@ int main(void)
 	while (1)
 	{
 		KEY_Scan(0);
-		LCD_Clear(WHITE);
-		LCD_ShowNum(50, 50, pos_set_ID.x, 3, 16);
-		LCD_ShowNum(100, 50, pos_set_ID.y, 3, 16);
-		LCD_ShowNum(50, 80, pos_now_ID.x, 3, 16);
-		LCD_ShowNum(100, 80, pos_now_ID.y, 3, 16);
-//		LCD_DrawLine(pos_X, 0, pos_X, 320);
-//		LCD_DrawLine(0, pos_Y, 240, pos_Y);
-		delay_ms(50);
+		//LCD_Clear(WHITE);
+//		LCD_ShowNum(50, 50, g_ball_x, 3, 16);
+//		LCD_ShowNum(100, 50, g_ball_y, 3, 16);
+		LCD_DrawPoint(g_ball_x, g_ball_y);
+		delay_ms(10);
 	}
 	//else rgb565_test(); 
 }

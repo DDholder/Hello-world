@@ -1,5 +1,5 @@
 Dependencies for Project 'OV2640', Target 'OV2640': (DO NOT MODIFY !)
-F (.\main.c)(0x598AD22C)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork -I ..\CORE -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\USER -I ..\HARDWARE\LED -I ..\HARDWARE\LCD -I ..\HARDWARE\KEY -I ..\HARDWARE\DCMI -I ..\HARDWARE\OV2640 -I ..\HARDWARE\TIMER -I ..\HARDWARE\USART2 -I ..\FWLIB\inc -I ..\USMART -I ..\HARDWARE\control-I"F:\17国赛\Hello-world\实验35 摄像头实验\USER\RTE"-IE:\danpianjigongju\Keil5.2\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\danpianjigongju\Keil5.2\main\ARM\CMSIS\Include-D__UVISION_VERSION="521" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER --C99-o ..\obj\main.o --omf_browse ..\obj\main.crf --depend ..\obj\main.d)
+F (.\main.c)(0x598F0D43)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork -I ..\CORE -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\USER -I ..\HARDWARE\LED -I ..\HARDWARE\LCD -I ..\HARDWARE\KEY -I ..\HARDWARE\DCMI -I ..\HARDWARE\OV2640 -I ..\HARDWARE\TIMER -I ..\HARDWARE\USART2 -I ..\FWLIB\inc -I ..\USMART -I ..\HARDWARE\control-I"F:\17国赛\Hello-world\实验35 摄像头实验\USER\RTE"-IE:\danpianjigongju\Keil5.2\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\danpianjigongju\Keil5.2\main\ARM\CMSIS\Include-D__UVISION_VERSION="521" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER --C99-o ..\obj\main.o --omf_browse ..\obj\main.crf --depend ..\obj\main.d)
 I (..\SYSTEM\sys\sys.h)(0x55CC1472)
 I (..\USER\stm32f4xx.h)(0x542BA484)
 I (..\CORE\core_cm4.h)(0x53C7D532)
@@ -49,7 +49,7 @@ I (..\HARDWARE\TIMER\timer.h)(0x5987F88D)
 I (..\HARDWARE\OV2640\ov2640.h)(0x537344B6)
 I (..\HARDWARE\OV2640\sccb.h)(0x537343CE)
 I (..\HARDWARE\DCMI\dcmi.h)(0x54364F7A)
-I (..\HARDWARE\control\control.h)(0x598AD1CB)
+I (..\HARDWARE\control\control.h)(0x598F09B0)
 F (.\stm32f4xx_it.c)(0x5426CDF6)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork -I ..\CORE -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\USER -I ..\HARDWARE\LED -I ..\HARDWARE\LCD -I ..\HARDWARE\KEY -I ..\HARDWARE\DCMI -I ..\HARDWARE\OV2640 -I ..\HARDWARE\TIMER -I ..\HARDWARE\USART2 -I ..\FWLIB\inc -I ..\USMART -I ..\HARDWARE\control-I"F:\17国赛\Hello-world\实验35 摄像头实验\USER\RTE"-IE:\danpianjigongju\Keil5.2\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\danpianjigongju\Keil5.2\main\ARM\CMSIS\Include-D__UVISION_VERSION="521" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER --C99-o ..\obj\stm32f4xx_it.o --omf_browse ..\obj\stm32f4xx_it.crf --depend ..\obj\stm32f4xx_it.d)
 I (stm32f4xx_it.h)(0x5426CDC2)
 I (stm32f4xx.h)(0x542BA484)
@@ -240,7 +240,7 @@ I (..\FWLIB\inc\stm32f4xx_dac.h)(0x53DBAFAE)
 I (..\FWLIB\inc\stm32f4xx_dcmi.h)(0x53DBAFAE)
 I (..\FWLIB\inc\stm32f4xx_fsmc.h)(0x53DBAFAE)
 I (..\SYSTEM\delay\delay.h)(0x53B7797E)
-I (..\HARDWARE\control\control.h)(0x598AD1CB)
+I (..\HARDWARE\control\control.h)(0x598F09B0)
 F (..\HARDWARE\DCMI\dcmi.c)(0x5438C498)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork -I ..\CORE -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\USER -I ..\HARDWARE\LED -I ..\HARDWARE\LCD -I ..\HARDWARE\KEY -I ..\HARDWARE\DCMI -I ..\HARDWARE\OV2640 -I ..\HARDWARE\TIMER -I ..\HARDWARE\USART2 -I ..\FWLIB\inc -I ..\USMART -I ..\HARDWARE\control-I"F:\17国赛\Hello-world\实验35 摄像头实验\USER\RTE"-IE:\danpianjigongju\Keil5.2\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\danpianjigongju\Keil5.2\main\ARM\CMSIS\Include-D__UVISION_VERSION="521" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER --C99-o ..\obj\dcmi.o --omf_browse ..\obj\dcmi.crf --depend ..\obj\dcmi.d)
 I (..\SYSTEM\sys\sys.h)(0x55CC1472)
 I (..\USER\stm32f4xx.h)(0x542BA484)
@@ -442,8 +442,8 @@ I (..\FWLIB\inc\stm32f4xx_fsmc.h)(0x53DBAFAE)
 I (..\HARDWARE\LED\led.h)(0x53B53724)
 I (..\SYSTEM\usart\usart.h)(0x5397010E)
 I (E:\danpianjigongju\Keil5.2\main\ARM\ARMCC\include\stdio.h)(0x574E3E26)
-I (..\HARDWARE\control\control.h)(0x598AD1CB)
-F (..\HARDWARE\control\control.c)(0x598AE1A8)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork -I ..\CORE -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\USER -I ..\HARDWARE\LED -I ..\HARDWARE\LCD -I ..\HARDWARE\KEY -I ..\HARDWARE\DCMI -I ..\HARDWARE\OV2640 -I ..\HARDWARE\TIMER -I ..\HARDWARE\USART2 -I ..\FWLIB\inc -I ..\USMART -I ..\HARDWARE\control-I"F:\17国赛\Hello-world\实验35 摄像头实验\USER\RTE"-IE:\danpianjigongju\Keil5.2\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\danpianjigongju\Keil5.2\main\ARM\CMSIS\Include-D__UVISION_VERSION="521" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER --C99-o ..\obj\control.o --omf_browse ..\obj\control.crf --depend ..\obj\control.d)
+I (..\HARDWARE\control\control.h)(0x598F09B0)
+F (..\HARDWARE\control\control.c)(0x598F09B0)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork -I ..\CORE -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\USER -I ..\HARDWARE\LED -I ..\HARDWARE\LCD -I ..\HARDWARE\KEY -I ..\HARDWARE\DCMI -I ..\HARDWARE\OV2640 -I ..\HARDWARE\TIMER -I ..\HARDWARE\USART2 -I ..\FWLIB\inc -I ..\USMART -I ..\HARDWARE\control-I"F:\17国赛\Hello-world\实验35 摄像头实验\USER\RTE"-IE:\danpianjigongju\Keil5.2\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\danpianjigongju\Keil5.2\main\ARM\CMSIS\Include-D__UVISION_VERSION="521" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER --C99-o ..\obj\control.o --omf_browse ..\obj\control.crf --depend ..\obj\control.d)
 I (..\SYSTEM\sys\sys.h)(0x55CC1472)
 I (..\USER\stm32f4xx.h)(0x542BA484)
 I (..\CORE\core_cm4.h)(0x53C7D532)
@@ -479,7 +479,7 @@ I (..\FWLIB\inc\stm32f4xx_can.h)(0x53DBAFAE)
 I (..\FWLIB\inc\stm32f4xx_dac.h)(0x53DBAFAE)
 I (..\FWLIB\inc\stm32f4xx_dcmi.h)(0x53DBAFAE)
 I (..\FWLIB\inc\stm32f4xx_fsmc.h)(0x53DBAFAE)
-I (..\HARDWARE\control\control.h)(0x598AD1CB)
+I (..\HARDWARE\control\control.h)(0x598F09B0)
 I (..\HARDWARE\TIMER\timer.h)(0x5987F88D)
 I (E:\danpianjigongju\Keil5.2\main\ARM\ARMCC\include\math.h)(0x574E3E26)
 F (..\SYSTEM\delay\delay.c)(0x55CC1356)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork -I ..\CORE -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\USER -I ..\HARDWARE\LED -I ..\HARDWARE\LCD -I ..\HARDWARE\KEY -I ..\HARDWARE\DCMI -I ..\HARDWARE\OV2640 -I ..\HARDWARE\TIMER -I ..\HARDWARE\USART2 -I ..\FWLIB\inc -I ..\USMART -I ..\HARDWARE\control-I"F:\17国赛\Hello-world\实验35 摄像头实验\USER\RTE"-IE:\danpianjigongju\Keil5.2\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\danpianjigongju\Keil5.2\main\ARM\CMSIS\Include-D__UVISION_VERSION="521" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER --C99-o ..\obj\delay.o --omf_browse ..\obj\delay.crf --depend ..\obj\delay.d)
@@ -555,7 +555,7 @@ I (..\FWLIB\inc\stm32f4xx_can.h)(0x53DBAFAE)
 I (..\FWLIB\inc\stm32f4xx_dac.h)(0x53DBAFAE)
 I (..\FWLIB\inc\stm32f4xx_dcmi.h)(0x53DBAFAE)
 I (..\FWLIB\inc\stm32f4xx_fsmc.h)(0x53DBAFAE)
-F (..\SYSTEM\usart\usart.c)(0x5987F88D)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork -I ..\CORE -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\USER -I ..\HARDWARE\LED -I ..\HARDWARE\LCD -I ..\HARDWARE\KEY -I ..\HARDWARE\DCMI -I ..\HARDWARE\OV2640 -I ..\HARDWARE\TIMER -I ..\HARDWARE\USART2 -I ..\FWLIB\inc -I ..\USMART -I ..\HARDWARE\control-I"F:\17国赛\Hello-world\实验35 摄像头实验\USER\RTE"-IE:\danpianjigongju\Keil5.2\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\danpianjigongju\Keil5.2\main\ARM\CMSIS\Include-D__UVISION_VERSION="521" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER --C99-o ..\obj\usart.o --omf_browse ..\obj\usart.crf --depend ..\obj\usart.d)
+F (..\SYSTEM\usart\usart.c)(0x598F0AD6)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork -I ..\CORE -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\USER -I ..\HARDWARE\LED -I ..\HARDWARE\LCD -I ..\HARDWARE\KEY -I ..\HARDWARE\DCMI -I ..\HARDWARE\OV2640 -I ..\HARDWARE\TIMER -I ..\HARDWARE\USART2 -I ..\FWLIB\inc -I ..\USMART -I ..\HARDWARE\control-I"F:\17国赛\Hello-world\实验35 摄像头实验\USER\RTE"-IE:\danpianjigongju\Keil5.2\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\danpianjigongju\Keil5.2\main\ARM\CMSIS\Include-D__UVISION_VERSION="521" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER --C99-o ..\obj\usart.o --omf_browse ..\obj\usart.crf --depend ..\obj\usart.d)
 I (..\SYSTEM\sys\sys.h)(0x55CC1472)
 I (..\USER\stm32f4xx.h)(0x542BA484)
 I (..\CORE\core_cm4.h)(0x53C7D532)
@@ -593,7 +593,7 @@ I (..\FWLIB\inc\stm32f4xx_dcmi.h)(0x53DBAFAE)
 I (..\FWLIB\inc\stm32f4xx_fsmc.h)(0x53DBAFAE)
 I (..\SYSTEM\usart\usart.h)(0x5397010E)
 I (E:\danpianjigongju\Keil5.2\main\ARM\ARMCC\include\stdio.h)(0x574E3E26)
-I (..\HARDWARE\control\control.h)(0x598AD1CB)
+I (..\HARDWARE\control\control.h)(0x598F09B0)
 I (..\HARDWARE\TIMER\timer.h)(0x5987F88D)
 F (..\CORE\startup_stm32f40_41xxx.s)(0x53DBBC54)(--cpu Cortex-M4.fp -g --apcs=interwork -I"F:\17国赛\Hello-world\实验35 摄像头实验\USER\RTE"-IE:\danpianjigongju\Keil5.2\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\danpianjigongju\Keil5.2\main\ARM\CMSIS\Include--pd "__UVISION_VERSION SETA 521" --pd "STM32F407xx SETA 1"--list ..\obj\startup_stm32f40_41xxx.lst --xref -o ..\obj\startup_stm32f40_41xxx.o --depend ..\obj\startup_stm32f40_41xxx.d)
 F (..\FWLIB\src\misc.c)(0x53DBB016)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork -I ..\CORE -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\USER -I ..\HARDWARE\LED -I ..\HARDWARE\LCD -I ..\HARDWARE\KEY -I ..\HARDWARE\DCMI -I ..\HARDWARE\OV2640 -I ..\HARDWARE\TIMER -I ..\HARDWARE\USART2 -I ..\FWLIB\inc -I ..\USMART -I ..\HARDWARE\control-I"F:\17国赛\Hello-world\实验35 摄像头实验\USER\RTE"-IE:\danpianjigongju\Keil5.2\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IE:\danpianjigongju\Keil5.2\main\ARM\CMSIS\Include-D__UVISION_VERSION="521" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER --C99-o ..\obj\misc.o --omf_browse ..\obj\misc.crf --depend ..\obj\misc.d)
